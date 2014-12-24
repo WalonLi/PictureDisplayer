@@ -4,7 +4,7 @@
 2. We don't have good idea to resolve effective now.
 3. Project name
 4. Build tool (Makefile or CMake or ... ?)
-5.
+5. ...
 
 ----
 
