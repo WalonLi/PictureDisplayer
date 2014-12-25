@@ -1,10 +1,6 @@
 # Known Issue or Something
 
-1. Coding Style
-2. We don't have good idea to resolve effective now.
-3. Project name
-4. Build tool (Makefile or CMake or ... ?)
-5. ...
+1. ...
 
 ----
 
@@ -15,6 +11,10 @@
 ----
 
 # History
+## 14/12/25
+1. Project Name: PictureDisplayer(pdr)
+2. Update UML(Component/Effective)
+3. Coding Style have been checked.
 
 ## 14/12/23
 1. Architecture discussion
