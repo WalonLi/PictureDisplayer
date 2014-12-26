@@ -1,0 +1,8 @@
+##ignore file list
+
+*.o
+ui_*
+PictureDisplayer
+Makefile
+PictureDisplayer.pro.user
+moc_*
