@@ -35,10 +35,21 @@ win32-g++* {
 CONFIG  +=  c++11
 #DEFINES += STATIC
 
-SOURCES +=  src/main.cpp \
-            src/SelectorWindow.cpp
+SOURCES +=  \
+    src/main.cpp \
+    src/SelectorWindow.cpp \
+    src/Component/PictureComponent.cpp \
+    src/PlayerWindow.cpp
 
-HEADERS +=  include/SelectorWindow.h
+HEADERS +=  \
+    include/SelectorWindow.h \
+    include/IPlay.h \
+    include/Component/Component.h \
+    include/Component/PictureComponent.h \
+    include/Component/TextComponent.h \
+    include/Effective/Effective.h \
+    include/Effective/NoneEffective.h \
+    include/PlayerWindow.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

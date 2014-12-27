@@ -24,6 +24,6 @@ public:
 
 private:
     Ui::Selector *ui;
-};
+} ;
 
 #endif // MAINWINDOW_H
