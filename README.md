@@ -1,18 +1,20 @@
 # PictureDisplayer
 
-## Build on Linux 64-bit (Ubuntu 14.04.1 LTS x86_64)
+### Build on Linux 64-bit (Ubuntu-14.04.1-LTS-x86_64)
 
-- QT
+#### QT
 [Download and install](http://www.qt.io/download/)
 
-- libGL
+#### libGL
 ```bash
 $ sudo apt-get install libglu1-mesa-dev -y
 ```
 
-- Boost
+#### Boost
 [Download and install](http://www.boost.org/)
+
 or
+
 ```bash
 $ git clone https://github.com/boostorg/boost.git
 $ cd boost
@@ -25,7 +27,7 @@ $ sudo ln -s `pwd`/build/include/boost/ /usr/include/boost_1_57_0
 $ sudo ln -s `pwd`/build/lib/ /usr/lib/boost_lib
 ```
 
-- Application
+#### Application
 ```bash
 $ git clone https://github.com/WalonLi/PictureDisplayer.git
 $ cd PictureDisplayer/
