@@ -7,16 +7,38 @@
 #include "include/SelectorWindow.h"
 #include "include/PlayerWindow.h"
 #include <QApplication>
+#include <QDesktopWidget>
 #include <QDebug>
+
+void MoveToCenter(QMainWindow& w)
+{
+    // move window to center.
+    if (QApplication::desktop()->screenCount() <= 1)
+    {
+        w.move((QApplication::desktop()->width() - w.width())/2,
+                (QApplication::desktop()->height() - w.height())/2);
+    }
+    else
+    {
+        QRect rect = QApplication::desktop()->screenGeometry(0);
+        w.move((rect.width()-w.width())/2,
+                (rect.height()-w.height())/2);
+    }
+}
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    SelectorWindow w;
-    w.show();
-    a.exec();
-    PlayerWindow p;
-    p.show();
-    a.exec();
+    QApplication app(argc, argv);
+
+    SelectorWindow select_window;
+    select_window.show();
+    MoveToCenter(select_window) ;
+    app.exec();
+
+    PlayerWindow player_window;
+    player_window.show();
+    MoveToCenter(player_window) ;
+    app.exec();
+
     return 0 ;
 }

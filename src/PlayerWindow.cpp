@@ -11,6 +11,7 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Player)
 {
+    this->setFixedSize(800, 600);
     ui->setupUi(this);
 }
 
