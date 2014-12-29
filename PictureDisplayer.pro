@@ -49,7 +49,9 @@ HEADERS +=  \
     include/Component/TextComponent.h \
     include/Effective/Effective.h \
     include/Effective/NoneEffective.h \
-    include/PlayerWindow.h
+    include/PlayerWindow.h \
+    include/Frame.h \
+    include/Contorller.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

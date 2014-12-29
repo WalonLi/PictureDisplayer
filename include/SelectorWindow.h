@@ -24,7 +24,9 @@ public:
     ~SelectorWindow();
 
 private slots:
-    void on_select_button_clicked();
+    void on_select_btn_clicked();
+
+    void on_load_btn_clicked();
 
 private:
     Ui::Selector *ui;
