@@ -6,3 +6,4 @@ PictureDisplayer
 Makefile
 PictureDisplayer.pro.user
 moc_*
+build/*

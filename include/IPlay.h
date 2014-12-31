@@ -13,7 +13,7 @@ class IPlay
 {
 public:
     IPlay(){}
-    ~IPlay(){}
+    virtual ~IPlay(){}
     virtual void play() = 0 ;
     virtual void stop() = 0 ;
     virtual void forward() = 0 ;

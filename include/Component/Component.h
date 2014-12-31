@@ -16,7 +16,7 @@ class Component : public IPlay
 {
 public :
     explicit Component(QWidget *w) : IPlay(), base_widget(w){}
-    ~Component(){}
+    virtual ~Component(){}
 
     QWidget* getBaseWidget() { return base_widget ; }
 

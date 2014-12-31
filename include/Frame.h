@@ -17,14 +17,17 @@ public:
     ~Frame()
     {
         for (auto it = component.begin() ; it != component.end() ; ++it)
-            delete it ;
+            delete *it ;
     }
 
     void addComponent(Component *c){ component.push_back(c); }
-    void addComponent(std::vector<Component*> & c) { component += c; }
+    void addComponent(std::vector<Component*> & c)
+    {
+        component.insert(component.end(), c.begin(), c.end());
+    }
 
 private:
     std::vector<Component*> component ;
     std::chrono::milliseconds duration ;
-}
+};
 }

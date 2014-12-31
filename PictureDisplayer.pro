@@ -39,7 +39,8 @@ SOURCES +=  \
     src/main.cpp \
     src/SelectorWindow.cpp \
     src/Component/PictureComponent.cpp \
-    src/PlayerWindow.cpp
+    src/PlayerWindow.cpp \
+    src/Controller.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -51,7 +52,7 @@ HEADERS +=  \
     include/Effective/NoneEffective.h \
     include/PlayerWindow.h \
     include/Frame.h \
-    include/Contorller.h
+    include/Controller.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

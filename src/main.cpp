@@ -6,6 +6,7 @@
 
 #include "include/SelectorWindow.h"
 #include "include/PlayerWindow.h"
+#include "include/Controller.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
@@ -28,6 +29,8 @@ void MoveToCenter(QMainWindow& w)
 
 int main(int argc, char *argv[])
 {
+    pdr::Controller *controller = pdr::Controller::getInstance();
+
     QApplication app(argc, argv);
 
     SelectorWindow select_window;
