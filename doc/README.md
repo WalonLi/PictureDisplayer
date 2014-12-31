@@ -1,6 +1,6 @@
 # Known Issue or Something
 
-1. Demo Frame and PictureComponet 
+1. Demo Frame and PictureComponet, play background music
 2. Transparent player window and button
 3. Finish Spinner bar(Selector->Player animation)
 4. Parser and FileSelector
@@ -18,7 +18,7 @@
 ## 14/12/31
 1. Controller/Frame/Component interface is done.
 2. Basic Selector and Player window is done.
-3. Now, we need a demo that can be display picture.
+3. Now, we need a demo that can be display picture, background music.
 
 ## 14/12/25
 1. Project Name: PictureDisplayer(pdr)
