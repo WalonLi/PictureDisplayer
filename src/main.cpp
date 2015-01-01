@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
     pdr::Controller *controller = pdr::Controller::getInstance();
 
     QApplication app(argc, argv);
-
+    /*
     SelectorWindow select_window;
     select_window.show();
     MoveToCenter(select_window) ;
     app.exec();
-
+    */
     PlayerWindow player_window;
     player_window.show();
     MoveToCenter(player_window) ;

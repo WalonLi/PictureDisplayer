@@ -19,6 +19,25 @@ pdr::Controller::~Controller()
 
         this->frames.pop_back();
     }
+    while (this->threads.size()) {
+        delete this->threads.back();
+
+        this->threads.pop_back();
+    }
+}
+
+void pdr::Controller::resetController()
+{
+    while (this->frames.size()) {
+        delete this->frames.back();
+
+        this->frames.pop_back();
+    }
+    while (this->threads.size()) {
+        delete this->threads.back();
+
+        this->threads.pop_back();
+    }
 }
 
 pdr::Controller * pdr::Controller::getInstance()

@@ -8,6 +8,7 @@
 #define CONTROLLER_H
 
 #include <QThread>
+#include <thread>
 #include "Frame.h"
 #include "IPlay.h"
 
@@ -28,13 +29,15 @@ public:
     void forward(){}
     void backward(){}
 
+    void resetController() ;
+
 private:
     Controller();
     ~Controller();
 
 private:
-    std::vector<Frame *> frames ;
-    std::vector<QThread> thread_obj ;
+    std::vector<Frame*> frames ;
+    std::vector<std::thread*> threads ;
 };
 }
 

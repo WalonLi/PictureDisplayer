@@ -8,6 +8,8 @@
 #define PLAYER_WINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
 #include "ui_Player.h"
 
 namespace Ui {
@@ -24,6 +26,7 @@ public:
 
 private:
     Ui::Player *ui;
+    QGraphicsScene *scene;
 } ;
 
 #endif // MAINWINDOW_H
