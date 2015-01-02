@@ -8,6 +8,7 @@
 #define COMPONENT_H
 
 #include <QWidget>
+#include <QDebug>
 #include "../IPlay.h"
 
 namespace pdr

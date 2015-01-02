@@ -6,6 +6,7 @@
 
 #include <chrono>
 #include <vector>
+#include <QDebug>
 #include "Component/Component.h"
 
 namespace pdr

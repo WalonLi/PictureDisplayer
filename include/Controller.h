@@ -9,6 +9,7 @@
 
 #include <QThread>
 #include <thread>
+#include <QDebug>
 #include "Frame.h"
 #include "IPlay.h"
 

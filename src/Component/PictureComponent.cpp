@@ -5,30 +5,42 @@
 **/
 
 #include "include/Component/PictureComponent.h"
+#include <QDebug>
 
-
-void pdr::PictureComponent::paintEvent(QPaintEvent *event)
+// void pdr::PictureComponent::paintEvent(QPaintEvent *event)
+void pdr::PictureComponent::paint(QPainter *painter,
+                                  const QStyleOptionGraphicsItem *option,
+                                  QWidget *widget)
 {
-    // -5 ??????
+
+
     if (!effect)
     {
+
+        // this->resize(800,600);
         switch (scale)
         {
             case Scale::IgnoreAspecRatio:
                 QImage *temp = image ;
-                image = new QImage(image->scaled(800-5, 600-5, Qt::IgnoreAspectRatio));
+                image = new QImage(image->scaled(800, 600, Qt::IgnoreAspectRatio));
                 delete temp ;
                 break ;
             //default:
             //    break ;
         }
 
-        QPainter paint(this) ;
-        paint.drawImage(0,0, *image);
-        int h = (image->height() > 800-5) ? 800-5 : image->height() ;
-        int w = (image->width() > 600-5) ? 600-5 : image->width() ;
-        this->resize(h, w);
+
+        painter->drawImage(0,0, *image);
+
+        qreal width = (image->width() > 800) ? 800 : image->width() ;
+        qreal height = (image->height() > 600) ? 600 : image->height() ;
+        this->setPos(QPointF((800-width)/2, (600-height)/2));
     }
+}
+
+QRectF pdr::PictureComponent::boundingRect() const
+{
+    return QRectF(0,0,800,600) ;
 }
 
 void pdr::PictureComponent::play()

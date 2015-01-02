@@ -6,7 +6,10 @@
 
 #ifndef EFFECTIVE_H
 #define EFFECTIVE_H
+
 #include <QWidget>
+#include <QDebug>
+
 namespace pdr
 {
 class Effective

@@ -7,6 +7,8 @@
 #ifndef IPLAY_H
 #define IPLAY_H
 
+#include <QDebug>
+
 namespace pdr
 {
 class IPlay 
