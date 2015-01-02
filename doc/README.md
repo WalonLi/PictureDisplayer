@@ -1,10 +1,11 @@
 # Known Issue or Something
 
-1. Demo Frame and PictureComponet, play background music
-2. Transparent player window and button
-3. Finish Spinner bar(Selector->Player animation)
-4. Parser and FileSelector
-5. Pause and Continue in Player
+1. Demo Frame and PictureComponet(Done)
+2. Transparent player window and button(Limitation now, please see 1/2 history)
+3. Play background music
+4. Finish Spinner bar(Selector->Player animation)
+5. Parser and FileSelector
+6. Pause and Continue in Player
 
 ----
 
@@ -15,6 +16,12 @@
 ----
 
 # History
+## 14/12/31
+1. Finish Picture display(demo version) in Player.cpp
+2. CentOS(VM) not support opacity now, I will try it on Windows later...
+3. Use QGraphicView, QGraphicsScene, QGraphicsItem to implement show widget/component now.
+   Every componet should be inherit QGraphicsItem as good.
+
 ## 14/12/31
 1. Controller/Frame/Component interface is done.
 2. Basic Selector and Player window is done.
