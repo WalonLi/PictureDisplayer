@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui declarative testlib
+QT       += core gui declarative testlib multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,7 +14,7 @@ TEMPLATE = app
 ## Enviroment Setting ##
 linux-g++* {
     INCLUDEPATH += /usr/include/boost_1_57_0
-    LIBS += -L /usr/lib/boost_lib -lboost_system
+    LIBS += -L/usr/lib/boost_lib -lboost_system -lboost_thread
 }
 
 win32-g++* {
@@ -52,7 +52,8 @@ HEADERS +=  \
     include/Effective/NoneEffective.h \
     include/PlayerWindow.h \
     include/Frame.h \
-    include/Controller.h
+    include/Controller.h \
+    include/PdrBasic.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

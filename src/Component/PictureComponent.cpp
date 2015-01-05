@@ -6,35 +6,35 @@
 
 #include "include/Component/PictureComponent.h"
 #include <QDebug>
+#include <QStyleOptionGraphicsItem>
 
 // void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::PictureComponent::paint(QPainter *painter,
                                   const QStyleOptionGraphicsItem *option,
                                   QWidget *widget)
 {
-
-
     if (!effect)
     {
-
-        // this->resize(800,600);
         switch (scale)
         {
             case Scale::IgnoreAspecRatio:
+            {
                 QImage *temp = image ;
                 image = new QImage(image->scaled(800, 600, Qt::IgnoreAspectRatio));
                 delete temp ;
                 break ;
-            //default:
-            //    break ;
+            }
+            default:
+                break ;
         }
 
-
-        painter->drawImage(0,0, *image);
+        // painter->drawImage(0, 0, *image);
 
         qreal width = (image->width() > 800) ? 800 : image->width() ;
         qreal height = (image->height() > 600) ? 600 : image->height() ;
-        this->setPos(QPointF((800-width)/2, (600-height)/2));
+        // qDebug() << width << height ;
+        // this->setPos(QPointF((800-width)/2, (600-height)/2));
+        painter->drawImage((800-width)/2, (600-height)/2, *image);
     }
 }
 
