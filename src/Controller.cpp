@@ -11,6 +11,7 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QAudioOutput>
+#include <QDir>
 
 pdr::Controller::Controller()
     : IPlay(),
@@ -80,7 +81,7 @@ void pdr::Controller::play()
     scene->update();
 
     // Set bg_music
-    bg_music_file_ = "/home/WalonLi/Project/PictureDisplayer//music/bg_music.mp3" ;
+    bg_music_file_ = QDir::currentPath().toStdString() + "/../music/bg_music.mp3" ;
     QMediaPlayer bg_music_player ;
     QMediaContent bg_media(QUrl::fromLocalFile(bg_music_file_.c_str())) ;
     bg_music_player.setMedia(bg_media) ;
