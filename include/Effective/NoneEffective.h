@@ -14,7 +14,7 @@ namespace pdr
 class NoneEffective : public Effective
 {
     explicit NoneEffective(QWidget *w) : Effective(w) {}
-    ~NoneEffective(){}
+    virtual ~NoneEffective(){}
     void pre(){}
     void mid(){}
     void post(){}

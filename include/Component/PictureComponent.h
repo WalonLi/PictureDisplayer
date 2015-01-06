@@ -29,8 +29,8 @@ public :
 
 
     explicit PictureComponent(QObject *base, QImage *i, Scale s = Scale::None, Effective *e = NULL) :
-        QGraphicsItem(NULL),
         Component(base),
+        QGraphicsItem(NULL),
         image(i),
         scale(s),
         effect(e){}
@@ -58,9 +58,9 @@ protected:
     // void paintEvent(QPaintEvent *event) ;
 
 private :
-    Effective *effect ;    
     QImage *image ;
     Scale scale;
+    pdr::Effective *effect ;
 } ;
 }
 #endif

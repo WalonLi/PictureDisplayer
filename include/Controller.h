@@ -22,7 +22,7 @@ class Controller : public IPlay
 public:
     static pdr::Controller * getInstance();
 
-    void addFrame(Frame *frame);
+    void addFrame(pdr::Frame *frame);
 
     template <typename Iterator>
     void addFrame(Iterator first, Iterator last);
@@ -49,7 +49,7 @@ private:
     ~Controller();
 
 private:
-    std::vector<Frame*> frames ;
+    std::vector<pdr::Frame*> frames ;
     std::vector<boost::thread*> threads ;
 
     QColor bg_color ;

@@ -16,7 +16,7 @@ class Effective
 {
 public :
     explicit Effective(QWidget *w) : base_widget(w){}
-    ~Effective(){}
+    virtual ~Effective(){}
 
     QWidget* getBaseWidget() { return base_widget ; }
 
