@@ -7,41 +7,45 @@
 #include "include/Controller.h"
 #include "include/Component/PictureComponent.h"
 #include <QTest>
+//#include <QMultimedia>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QAudioOutput>
 
 pdr::Controller::Controller()
     : IPlay(),
-      frames(),
-      threads(),
-      bg_color(DEFAULT_BG_COLOR),
-      bg_music_file(""),
-      parent(0),
-      view(0)
+      frames_(),
+      threads_(),
+      bg_color_(DEFAULT_BG_COLOR),
+      bg_music_file_(""),
+      parent_(0),
+      view_(0)
 {
 }
 
 pdr::Controller::~Controller()
 {
-    while (this->frames.size()) {
-        delete this->frames.back();
-        this->frames.pop_back();
+    while (this->frames_.size()) {
+        delete this->frames_.back();
+        this->frames_.pop_back();
     }
-    while (this->threads.size()) {
-        this->threads.back()->interrupt() ;
-        delete this->threads.back();
-        this->threads.pop_back();
+    while (this->threads_.size()) {
+        this->threads_.back()->interrupt() ;
+        delete this->threads_.back();
+        this->threads_.pop_back();
     }
 }
 
 void pdr::Controller::resetController()
 {
-    while (this->frames.size()) {
-        delete this->frames.back();
-        this->frames.pop_back();
+    while (this->frames_.size()) {
+        delete this->frames_.back();
+        this->frames_.pop_back();
     }
-    while (this->threads.size()) {
-        this->threads.back()->interrupt() ;
-        delete this->threads.back();
-        this->threads.pop_back();
+    while (this->threads_.size()) {
+        this->threads_.back()->interrupt() ;
+        delete this->threads_.back();
+        this->threads_.pop_back();
     }
 }
 
@@ -54,14 +58,14 @@ pdr::Controller * pdr::Controller::getInstance()
 
 void pdr::Controller::addFrame(Frame *frame)
 {
-    this->frames.push_back(frame);
+    this->frames_.push_back(frame);
 }
 
 void pdr::Controller::play()
 {
     qDebug() << "I'm playing" ;
-    QGraphicsScene *scene = view->scene() ;
-    view->setBackgroundBrush(bg_color);
+    QGraphicsScene *scene = view_->scene() ;
+    view_->setBackgroundBrush(bg_color_);
 
     QTest::qWait(500) ; // wait few second to start play;
 
@@ -71,7 +75,22 @@ void pdr::Controller::play()
                                              new QImage("../image/walon.jpg"),
                                              pdr::PictureComponent::IgnoreAspecRatio));
     */
-    scene->addItem(new pdr::PictureComponent(scene, new QImage("../image/walon.jpg"))) ;
+    QGraphicsItem *pic = new pdr::PictureComponent(scene, new QImage("../image/walon.jpg")) ;
+    scene->addItem(pic) ;
+    scene->update();
+
+    // Set bg_music
+    bg_music_file_ = "/home/WalonLi/Project/PictureDisplayer//music/bg_music.mp3" ;
+    QMediaPlayer bg_music_player ;
+    QMediaContent bg_media(QUrl::fromLocalFile(bg_music_file_.c_str())) ;
+    bg_music_player.setMedia(bg_media) ;
+    bg_music_player.play(); // it will open thread to play music!!
+
+
+    QTest::qWait(15000) ;
+
+    // sample to clean picture
+    scene->removeItem(pic);
     scene->update();
 }
 

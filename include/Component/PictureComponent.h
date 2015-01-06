@@ -31,14 +31,14 @@ public :
     explicit PictureComponent(QObject *base, QImage *i, Scale s = Scale::None, Effective *e = NULL) :
         Component(base),
         QGraphicsItem(NULL),
-        image(i),
-        scale(s),
-        effect(e){}
+        image_(i),
+        scale_(s),
+        effect_(e){}
 
     ~PictureComponent()
     {
-        delete image ;
-        delete effect ;
+        delete image_ ;
+        delete effect_ ;
     }
 
 
@@ -46,8 +46,8 @@ public :
     void play() ;
     void stop() ;
 
-    QImage* getImage() {return image ;}
-    Effective* getEffective() {return effect ;}
+    QImage* getImage() {return image_ ;}
+    Effective* getEffective() {return effect_ ;}
 
 
     // override QGraphicsItem function
@@ -58,9 +58,9 @@ protected:
     // void paintEvent(QPaintEvent *event) ;
 
 private :
-    QImage *image ;
-    Scale scale;
-    pdr::Effective *effect ;
+    QImage *image_ ;
+    Scale scale_;
+    pdr::Effective *effect_ ;
 } ;
 }
 #endif

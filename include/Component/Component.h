@@ -16,17 +16,17 @@ namespace pdr
 class Component : public IPlay
 {
 public :
-    explicit Component(QObject *w) : IPlay(), base_obj(w){}
+    explicit Component(QObject *w) : IPlay(), base_obj_(w){}
     virtual ~Component(){}
 
-    QObject* getBaseObj() { return base_obj ; }
+    QObject* getBaseObj() { return base_obj_ ; }
 
     virtual void play(){}
     virtual void stop(){}
     virtual void forward(){}
     virtual void backward(){}
 private :
-    QObject *base_obj ;
+    QObject *base_obj_ ;
 } ;
 }
 #endif

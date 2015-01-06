@@ -7,5 +7,5 @@
 template <typename Iterator>
 void pdr::Controller::addFrame(Iterator first, Iterator last)
 {
-    this->frames.insert(this->frames.end(), first, last);
+    this->frames_.insert(this->frames_.end(), first, last);
 }

@@ -26,7 +26,7 @@ public:
 
 private:
     Ui::Player *ui;
-    QGraphicsScene *scene;
+    QGraphicsScene *scene_;
 } ;
 
 #endif // MAINWINDOW_H

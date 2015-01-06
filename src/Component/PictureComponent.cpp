@@ -13,14 +13,14 @@ void pdr::PictureComponent::paint(QPainter *painter,
                                   const QStyleOptionGraphicsItem *option,
                                   QWidget *widget)
 {
-    if (!effect)
+    if (!effect_)
     {
-        switch (scale)
+        switch (scale_)
         {
             case Scale::IgnoreAspecRatio:
             {
-                QImage *temp = image ;
-                image = new QImage(image->scaled(800, 600, Qt::IgnoreAspectRatio));
+                QImage *temp = image_ ;
+                image_ = new QImage(image_->scaled(800, 600, Qt::IgnoreAspectRatio));
                 delete temp ;
                 break ;
             }
@@ -30,11 +30,11 @@ void pdr::PictureComponent::paint(QPainter *painter,
 
         // painter->drawImage(0, 0, *image);
 
-        qreal width = (image->width() > 800) ? 800 : image->width() ;
-        qreal height = (image->height() > 600) ? 600 : image->height() ;
+        qreal width = (image_->width() > 800) ? 800 : image_->width() ;
+        qreal height = (image_->height() > 600) ? 600 : image_->height() ;
         // qDebug() << width << height ;
         // this->setPos(QPointF((800-width)/2, (600-height)/2));
-        painter->drawImage((800-width)/2, (600-height)/2, *image);
+        painter->drawImage((800-width)/2, (600-height)/2, *image_);
     }
 }
 

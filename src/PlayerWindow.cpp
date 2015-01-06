@@ -16,14 +16,14 @@
 PlayerWindow::PlayerWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Player),
-    scene(new QGraphicsScene())
+    scene_(new QGraphicsScene())
 {
     this->setFixedSize(800, 600);
     ui->setupUi(this);
 
 
     // set scene and block wheel signal
-    ui->graphicsView->setScene(scene);
+    ui->graphicsView->setScene(scene_);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->verticalScrollBar()->blockSignals(true) ;
@@ -33,7 +33,7 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     this->setWindowFlags(Qt::FramelessWindowHint);
 
     // set static scene size
-    scene->setSceneRect(0,0,800,600);
+    scene_->setSceneRect(0,0,800,600);
 
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
@@ -45,5 +45,5 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
 PlayerWindow::~PlayerWindow()
 {
     delete ui;
-    delete scene ;
+    delete scene_ ;
 }

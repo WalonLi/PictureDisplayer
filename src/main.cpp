@@ -11,7 +11,6 @@
 #include <QDesktopWidget>
 #include <QDebug>
 
-
 void MoveToCenter(QMainWindow& w)
 {
     // move window to center.
@@ -39,10 +38,13 @@ int main(int argc, char *argv[])
     MoveToCenter(select_window) ;
     app.exec();
     */
+
     PlayerWindow player_window;
     boost::thread m_t(&pdr::Controller::play, controller) ;
     player_window.show();
     MoveToCenter(player_window) ;
     app.exec();
+
+
     return 0 ;
 }
