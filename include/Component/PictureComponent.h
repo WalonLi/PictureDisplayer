@@ -16,7 +16,7 @@
 
 namespace pdr
 {
-class PictureComponent : public Component, public QGraphicsItem
+class PictureComponent : public Component
 {
 public :
     enum Scale
@@ -28,12 +28,7 @@ public :
     };
 
 
-    explicit PictureComponent(QObject *base, QImage *i, Scale s = Scale::None, Effective *e = NULL) :
-        Component(base),
-        QGraphicsItem(NULL),
-        image_(i),
-        scale_(s),
-        effect_(e){}
+    explicit PictureComponent(QImage *i, Scale s = Scale::None, Effective *e = NULL) ;
 
     ~PictureComponent()
     {

@@ -8,17 +8,14 @@
 #include "include/Component/PictureComponent.h"
 #include <QTest>
 //#include <QMultimedia>
-#include <QMediaPlayer>
-#include <QMediaPlaylist>
-#include <QAudioOutput>
-#include <QDir>
+
 
 pdr::Controller::Controller()
     : IPlay(),
       frames_(),
       threads_(),
       bg_color_(DEFAULT_BG_COLOR),
-      bg_music_file_(""),
+      bg_music_player_(),
       parent_(0),
       view_(0)
 {
@@ -37,12 +34,16 @@ pdr::Controller::~Controller()
     }
 }
 
-void pdr::Controller::resetController()
+void pdr::Controller::resetFrames()
 {
     while (this->frames_.size()) {
         delete this->frames_.back();
         this->frames_.pop_back();
     }
+}
+
+void pdr::Controller::resetThreads()
+{
     while (this->threads_.size()) {
         this->threads_.back()->interrupt() ;
         delete this->threads_.back();
@@ -65,34 +66,50 @@ void pdr::Controller::addFrame(Frame *frame)
 void pdr::Controller::play()
 {
     qDebug() << "I'm playing" ;
-    QGraphicsScene *scene = view_->scene() ;
+
+    // Set background color
     view_->setBackgroundBrush(bg_color_);
+    QGraphicsScene *scene = view_->scene() ;
 
     QTest::qWait(500) ; // wait few second to start play;
 
-    /*
-    view->graphicsView->setBackgroundBrush(QColor(0, 0xff, 0, 30));
-    scene->addItem(new pdr::PictureComponent(scene,
-                                             new QImage("../image/walon.jpg"),
-                                             pdr::PictureComponent::IgnoreAspecRatio));
-    */
-    QGraphicsItem *pic = new pdr::PictureComponent(scene, new QImage("../image/walon.jpg")) ;
-    scene->addItem(pic) ;
-    scene->update();
+    // play background music
+    bg_music_player_.play(); // it will open thread to play music!!
 
-    // Set bg_music
-    bg_music_file_ = QDir::currentPath().toStdString() + "/../music/bg_music.mp3" ;
-    QMediaPlayer bg_music_player ;
-    QMediaContent bg_media(QUrl::fromLocalFile(bg_music_file_.c_str())) ;
-    bg_music_player.setMedia(bg_media) ;
-    bg_music_player.play(); // it will open thread to play music!!
+    qDebug() << "frameCount:" << frames_.size() ;
+    for (auto it = frames_.begin() ; it != frames_.end() ; ++it)
+    {
+        // add component to scene and make its thread
+        std::vector<Component*> comps = (*it)->getComponents() ;
+        for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
+        {
+            scene->addItem(*it2);
+            scene->update();
+            boost::thread *comp_t = new boost::thread(&Component::play, *it2) ;
+            threads_.push_back(comp_t);
+            (*it2)->update() ;
+        }
 
 
-    QTest::qWait(15000) ;
+        // wait for all thread
+        for (auto it2 = threads_.begin() ; it2 != threads_.end() ; ++it2)
+        {
+            (*it2)->join();
+        }
 
-    // sample to clean picture
-    scene->removeItem(pic);
-    scene->update();
+        // reset thread for next use
+        this->resetThreads() ;
+
+        // removes components
+        for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
+        {
+            scene->removeItem(*it2);
+            scene->update();
+        }
+    }
+
+    // once play is done, emit siganl to PlayerWindow(choose replay or another)
+    // emit XXXX
 }
 
 void pdr::Controller::stop()

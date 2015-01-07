@@ -40,6 +40,7 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     controller->setParentWidget(this);
     controller->setGraphicsView(ui->graphicsView);
 
+    boost::thread m_t(&pdr::Controller::play, controller) ;
 }
 
 PlayerWindow::~PlayerWindow()

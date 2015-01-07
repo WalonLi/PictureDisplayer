@@ -7,9 +7,11 @@
 #include "include/SelectorWindow.h"
 #include "include/PlayerWindow.h"
 #include "include/Controller.h"
+#include "include/Component/PictureComponent.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
+#include <chrono>
 
 void MoveToCenter(QMainWindow& w)
 {
@@ -39,8 +41,22 @@ int main(int argc, char *argv[])
     app.exec();
     */
 
+    // below code to make a parser
+    controller->setBGMusic(QDir::currentPath().toStdString() + "/../music/bg_music.mp3");
+
+    pdr::Frame frame1(std::chrono::milliseconds(5000)) ;
+    frame1.addComponent(new pdr::PictureComponent(new QImage("../image/walon.jpg"),
+                                                  pdr::PictureComponent::IgnoreAspecRatio));
+
+    pdr::Frame frame2(std::chrono::milliseconds(4000)) ;
+    frame2.addComponent(new pdr::PictureComponent(new QImage("../image/walon2.jpg")));
+
+    controller->addFrame(&frame1);
+    controller->addFrame(&frame2);
+
+
+
     PlayerWindow player_window;
-    boost::thread m_t(&pdr::Controller::play, controller) ;
     player_window.show();
     MoveToCenter(player_window) ;
     app.exec();
