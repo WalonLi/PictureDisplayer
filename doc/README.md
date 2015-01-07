@@ -1,11 +1,11 @@
 # Known Issue or Something
 
-1. Demo Frame and PictureComponet(Done)
-2. Transparent player window and button(Limitation now, please see 1/2 history)
-3. Play background music
-4. Finish Spinner bar(Selector->Player animation)
-5. Parser and FileSelector
-6. Pause and Continue in Player
+1. Transparent player window and button(Limitation now, please see 1/2 history)
+2. Controller
+3. Finish Spinner bar(Selector->Player animation)
+4. Parser and FileSelector
+5. Pause and Continue in Player
+6. Run fail with QT5.4
 
 ----
 
@@ -16,6 +16,9 @@
 ----
 
 # History
+## 14/01/08
+1. Simple controller is done, it can play two pictures and background music
+
 ## 14/12/31
 1. Finish Picture display(demo version) in Player.cpp
 2. CentOS(VM) not support opacity now, I will try it on Windows later...
