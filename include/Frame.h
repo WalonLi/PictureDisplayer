@@ -31,6 +31,8 @@ public:
     std::vector<Component*> & getComponents(){ return components_ ; }
     Component* getComponent(int i){ return components_[i] ;}
 
+    std::chrono::milliseconds getDuration() const { return duration_ ; }
+
 private:
     std::vector<Component*> components_ ;
     std::chrono::milliseconds duration_ ;

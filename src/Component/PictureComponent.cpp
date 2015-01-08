@@ -50,7 +50,7 @@ QRectF pdr::PictureComponent::boundingRect() const
 void pdr::PictureComponent::play()
 {
     //QTest::qWait(5000) ;
-    std::this_thread::sleep_for(std::chrono::milliseconds(4000)) ;
+    std::this_thread::sleep_for(this->getDuration()) ;
 }
 
 void pdr::PictureComponent::stop()

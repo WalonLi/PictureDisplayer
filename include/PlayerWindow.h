@@ -24,6 +24,12 @@ public:
     explicit PlayerWindow(QWidget *parent = 0);
     ~PlayerWindow();
 
+signals:
+    void sendPlayerEndSignal() ;
+
+private slots:
+    void getPlayerEndSignal() ;
+
 private:
     Ui::Player *ui;
     QGraphicsScene *scene_;

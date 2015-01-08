@@ -21,6 +21,8 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     this->setFixedSize(800, 600);
     ui->setupUi(this);
 
+    // connect signal
+    QObject::connect(this, SIGNAL(sendPlayerEndSignal()), this, SLOT(getPlayerEndSignal())) ;
 
     // set scene and block wheel signal
     ui->graphicsView->setScene(scene_);
@@ -37,10 +39,17 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
 
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
-    controller->setParentWidget(this);
+    controller->setPlayerWindow(this);
     controller->setGraphicsView(ui->graphicsView);
 
     boost::thread m_t(&pdr::Controller::play, controller) ;
+}
+
+void PlayerWindow::getPlayerEndSignal()
+{
+    qDebug() << "End" ;
+    pdr::Controller::freeInstance() ;
+    QApplication::quit() ;
 }
 
 PlayerWindow::~PlayerWindow()

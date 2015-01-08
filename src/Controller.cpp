@@ -9,6 +9,7 @@
 #include <QTest>
 //#include <QMultimedia>
 
+pdr::Controller* pdr::Controller::instance = NULL ;
 
 pdr::Controller::Controller()
     : IPlay(),
@@ -16,13 +17,18 @@ pdr::Controller::Controller()
       threads_(),
       bg_color_(DEFAULT_BG_COLOR),
       bg_music_player_(),
-      parent_(0),
-      view_(0)
+      view_(0),
+      s_window_(0),
+      p_window_(0)
 {
 }
 
 pdr::Controller::~Controller()
 {
+    for (auto it = frames_.begin() ; it != frames_.end() ; ++it)
+        delete *it ;
+
+    /*
     while (this->frames_.size()) {
         delete this->frames_.back();
         this->frames_.pop_back();
@@ -32,6 +38,7 @@ pdr::Controller::~Controller()
         delete this->threads_.back();
         this->threads_.pop_back();
     }
+    */
 }
 
 void pdr::Controller::resetFrames()
@@ -53,9 +60,14 @@ void pdr::Controller::resetThreads()
 
 pdr::Controller * pdr::Controller::getInstance()
 {
-    static pdr::Controller instance;
+    if (!instance) instance = new pdr::Controller() ;
+    return instance ;
+}
 
-    return &instance;
+pdr::Controller * pdr::Controller::freeInstance()
+{
+    if (instance) delete instance ;
+    instance = NULL ;
 }
 
 void pdr::Controller::addFrame(Frame *frame)
@@ -81,8 +93,10 @@ void pdr::Controller::play()
     {
         // add component to scene and make its thread
         std::vector<Component*> comps = (*it)->getComponents() ;
+        std::chrono::milliseconds duration = (*it)->getDuration() ;
         for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
         {
+            (*it2)->setDuration(duration) ;
             scene->addItem(*it2);
             scene->update();
             boost::thread *comp_t = new boost::thread(&Component::play, *it2) ;
@@ -93,9 +107,7 @@ void pdr::Controller::play()
 
         // wait for all thread
         for (auto it2 = threads_.begin() ; it2 != threads_.end() ; ++it2)
-        {
             (*it2)->join();
-        }
 
         // reset thread for next use
         this->resetThreads() ;
@@ -108,8 +120,10 @@ void pdr::Controller::play()
         }
     }
 
+    bg_music_player_.stop();
     // once play is done, emit siganl to PlayerWindow(choose replay or another)
-    // emit XXXX
+    // emit sendEndSignal() ;
+    if (p_window_) emit p_window_->sendPlayerEndSignal();
 }
 
 void pdr::Controller::stop()

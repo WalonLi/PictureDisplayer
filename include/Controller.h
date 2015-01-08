@@ -16,6 +16,8 @@
 #include <QDir>
 #include "Frame.h"
 #include "IPlay.h"
+#include "PlayerWindow.h"
+#include "SelectorWindow.h"
 #include "PdrBasic.h"
 
 namespace pdr
@@ -24,6 +26,7 @@ class Controller : public IPlay
 {
 public:
     static pdr::Controller * getInstance();
+    static pdr::Controller * freeInstance();
 
     void addFrame(pdr::Frame *frame);
 
@@ -45,8 +48,9 @@ public:
         bg_music_player_.setMedia(media) ;
     }
 
-    void setParentWidget(QWidget *w) { parent_ = w; }
     void setGraphicsView(QGraphicsView *v) { view_ = v; }
+    void setSelectorWindow(SelectorWindow *w) { s_window_ = w; }
+    void setPlayerWindow(PlayerWindow *w) { p_window_ = w; }
 
     QColor getBGColor() const { return bg_color_; }
 
@@ -55,7 +59,6 @@ public:
         return bg_music_player_.currentMedia();
     }
 
-    QWidget *getParentWidget() const { return parent_; }
     QGraphicsView *getGraphicsView() const { return view_; }
 
     void play() ;
@@ -70,6 +73,7 @@ private:
     Controller();
     ~Controller();
 
+
 private:
     std::vector<pdr::Frame*> frames_ ;
     std::vector<boost::thread*> threads_ ;
@@ -78,8 +82,12 @@ private:
     QMediaPlayer bg_music_player_ ;
 
     // Belong to view systme, don't free it.
-    QWidget *parent_ ;
     QGraphicsView *view_ ;
+    SelectorWindow *s_window_ ;
+    PlayerWindow *p_window_ ;
+
+    // controller instance
+    static pdr::Controller *instance ;
 };
 }
 

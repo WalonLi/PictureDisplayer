@@ -30,7 +30,7 @@ public :
 
     explicit PictureComponent(QImage *i, Scale s = Scale::None, Effective *e = NULL) ;
 
-    ~PictureComponent()
+    virtual ~PictureComponent()
     {
         delete image_ ;
         delete effect_ ;
