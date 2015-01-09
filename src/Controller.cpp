@@ -7,6 +7,7 @@
 #include "include/Controller.h"
 #include "include/Component/PictureComponent.h"
 #include <QTest>
+#include <QBitmap>
 //#include <QMultimedia>
 
 pdr::Controller* pdr::Controller::instance = NULL ;
@@ -104,7 +105,6 @@ void pdr::Controller::play()
             (*it2)->update() ;
         }
 
-
         // wait for all thread
         for (auto it2 = threads_.begin() ; it2 != threads_.end() ; ++it2)
             (*it2)->join();
@@ -122,7 +122,6 @@ void pdr::Controller::play()
 
     bg_music_player_.stop();
     // once play is done, emit siganl to PlayerWindow(choose replay or another)
-    // emit sendEndSignal() ;
     if (p_window_) emit p_window_->sendPlayerEndSignal();
 }
 

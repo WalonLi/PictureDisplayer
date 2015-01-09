@@ -40,7 +40,8 @@ SOURCES +=  \
     src/SelectorWindow.cpp \
     src/Component/PictureComponent.cpp \
     src/PlayerWindow.cpp \
-    src/Controller.cpp
+    src/Controller.cpp \
+    src/Button/PlayPauseBtn.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -53,7 +54,8 @@ HEADERS +=  \
     include/PlayerWindow.h \
     include/Frame.h \
     include/Controller.h \
-    include/PdrBasic.h
+    include/PdrBasic.h \
+    include/Button/PlayPauseBtn.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

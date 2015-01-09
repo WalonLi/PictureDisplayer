@@ -11,6 +11,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "ui_Player.h"
+#include "Button/PlayPauseBtn.h"
 
 namespace Ui {
 class Player;
@@ -33,6 +34,7 @@ private slots:
 private:
     Ui::Player *ui;
     QGraphicsScene *scene_;
+    pdr::PlayPauseBtn *pp_btn_;
 } ;
 
 #endif // MAINWINDOW_H

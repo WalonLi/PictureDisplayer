@@ -9,6 +9,7 @@
 #include <QImage>
 #include <QDebug>
 #include <QScrollBar>
+#include <QBitmap>
 #include "include/Controller.h"
 #include "include/PlayerWindow.h"
 #include "include/Component/PictureComponent.h"
@@ -36,6 +37,25 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
 
     // set static scene size
     scene_->setSceneRect(0,0,800,600);
+
+    pp_btn_ = new pdr::PlayPauseBtn(this) ;
+    /*
+    // set image button
+    QPushButton *btn = new QPushButton(this) ;
+    btn->setGeometry(0,0, 64, 64);
+    QIcon icon ;
+    QPixmap pix("../image/play.png") ;
+    QPixmap pix2("../image/play.png") ;
+
+    icon.addPixmap(pix);
+    btn->setIcon(icon);
+    btn->setIconSize(QSize(64,64));
+    btn->setMask(pix.mask()) ;
+    // btn->setStyleSheet("QPushButton:clicked {background-color: red;}");
+    // btn->blockSignals(true) ;
+
+    btn->show();
+    */
 
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
