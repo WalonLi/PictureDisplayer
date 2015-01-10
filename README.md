@@ -5,8 +5,8 @@
 #### QT 5.3
 [Download and install](http://www.qt.io/download/)
 ```bash
-In order not to load resource(image/script) fail, please disable shadow build with QT Creator as 
-recommended.
+In order not to load resource(image/script) fail, please disable shadow build with 
+QT Creator as recommended.
 ```
 
 #### libGL
