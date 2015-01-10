@@ -2,15 +2,19 @@
 
 ### Build on Linux 64-bit (Ubuntu-14.04.1-LTS-x86_64)
 
-#### QT
+#### QT 5.3
 [Download and install](http://www.qt.io/download/)
+```bash
+In order not to load resource(image/script) fail, please disable shadow build with QT Creator as 
+recommended.
+```
 
 #### libGL
 ```bash
 $ sudo apt-get install libglu1-mesa-dev -y
 ```
 
-#### Boost
+#### Boost 1.57.0
 [Download and install](http://www.boost.org/)
 
 or
