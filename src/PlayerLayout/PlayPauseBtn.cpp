@@ -21,7 +21,7 @@ pdr::PlayPauseBtn::PlayPauseBtn(QWidget *parent):
     //this->setMask(pixmap_.mask()) ;
 }
 
-void pdr::PlayPauseBtn::paintEvent(QPaintEvent *e)
+void pdr::PlayPauseBtn::paintEvent(QPaintEvent *)
 {
     QPainter p(this) ;
     p.drawPixmap(0,0, pixmap_);

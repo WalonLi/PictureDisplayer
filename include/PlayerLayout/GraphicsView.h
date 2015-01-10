@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QGraphicsView>
 #include <QRectF>
+#include <boost/thread.hpp>
 #include "PlayPauseBtn.h"
 #include "CloseBtn.h"
 
@@ -25,7 +26,9 @@ public :
 
     //void paintEvent(QPaintEvent*) ;
     //QSize sizeHint() const ;
-    void mouseMoveEvent(QMouseEvent *e) ;
+    //void mouseMoveEvent(QMouseEvent *) ;
+    void hideButton() ;
+    void timerEvent(QTimerEvent *) ;
 protected:
     // Override paint event.
     // void paintEvent(QPaintEvent *event) ;
@@ -34,6 +37,7 @@ private :
     QGraphicsScene *scene_ ;
     PlayPauseBtn *pp_btn_;
     CloseBtn *close_btn_;
+    boost::thread *hide_btn_thread_ ;
 } ;
 }
 #endif

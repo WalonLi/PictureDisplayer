@@ -21,7 +21,7 @@ pdr::CloseBtn::CloseBtn(QWidget *parent):
     //this->setMask(pixmap_.mask()) ;
 }
 
-void pdr::CloseBtn::paintEvent(QPaintEvent *e)
+void pdr::CloseBtn::paintEvent(QPaintEvent *)
 {
     QPainter p(this) ;
     p.drawPixmap(0,0, pixmap_);

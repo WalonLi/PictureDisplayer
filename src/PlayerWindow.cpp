@@ -27,9 +27,11 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     graphics_view_ = new pdr::GraphicsView(ui->centralWidget) ;
 
     // set mouse track
-    this->setMouseTracking(true);
-    ui->centralWidget->setMouseTracking(true);
-    graphics_view_->setMouseTracking(true);
+    // this->setMouseTracking(true);
+    // ui->centralWidget->setMouseTracking(true);
+    // graphics_view_->setMouseTracking(true);
+
+
 
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
