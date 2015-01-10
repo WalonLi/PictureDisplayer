@@ -42,14 +42,14 @@ int main(int argc, char *argv[])
     */
 
     // below code to make a parser
-    controller->setBGMusic(QDir::currentPath().toStdString() + "/../music/bg_music.mp3");
+    controller->setBGMusic(QDir::currentPath().toStdString() + "/music/bg_music.mp3");
 
     pdr::Frame *frame1 = new pdr::Frame(std::chrono::milliseconds(8000)) ;
-    frame1->addComponent(new pdr::PictureComponent(new QImage("../image/walon.jpg"),
+    frame1->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
                                                   pdr::PictureComponent::IgnoreAspecRatio));
 
     pdr::Frame *frame2 = new pdr::Frame(std::chrono::milliseconds(8000)) ;
-    frame2->addComponent(new pdr::PictureComponent(new QImage("../image/walon2.jpg")));
+    frame2->addComponent(new pdr::PictureComponent(new QImage("image/walon2.jpg")));
 
     controller->addFrame(frame1);
     controller->addFrame(frame2);

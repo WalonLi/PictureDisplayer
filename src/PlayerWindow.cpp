@@ -5,19 +5,14 @@
 **/
 
 
-#include <QPushButton>
-#include <QImage>
 #include <QDebug>
-#include <QScrollBar>
-#include <QBitmap>
 #include "include/Controller.h"
 #include "include/PlayerWindow.h"
-#include "include/Component/PictureComponent.h"
 
 PlayerWindow::PlayerWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Player),
-    scene_(new QGraphicsScene())
+    graphics_view_(NULL)
 {
     this->setFixedSize(800, 600);
     ui->setupUi(this);
@@ -25,42 +20,21 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     // connect signal
     QObject::connect(this, SIGNAL(sendPlayerEndSignal()), this, SLOT(getPlayerEndSignal())) ;
 
-    // set scene and block wheel signal
-    ui->graphicsView->setScene(scene_);
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->verticalScrollBar()->blockSignals(true) ;
-    ui->graphicsView->horizontalScrollBar()->blockSignals(true) ;
-
     // set not frame less
     this->setWindowFlags(Qt::FramelessWindowHint);
 
-    // set static scene size
-    scene_->setSceneRect(0,0,800,600);
+    // set graphics view
+    graphics_view_ = new pdr::GraphicsView(ui->centralWidget) ;
 
-    pp_btn_ = new pdr::PlayPauseBtn(this) ;
-    /*
-    // set image button
-    QPushButton *btn = new QPushButton(this) ;
-    btn->setGeometry(0,0, 64, 64);
-    QIcon icon ;
-    QPixmap pix("../image/play.png") ;
-    QPixmap pix2("../image/play.png") ;
-
-    icon.addPixmap(pix);
-    btn->setIcon(icon);
-    btn->setIconSize(QSize(64,64));
-    btn->setMask(pix.mask()) ;
-    // btn->setStyleSheet("QPushButton:clicked {background-color: red;}");
-    // btn->blockSignals(true) ;
-
-    btn->show();
-    */
+    // set mouse track
+    this->setMouseTracking(true);
+    ui->centralWidget->setMouseTracking(true);
+    graphics_view_->setMouseTracking(true);
 
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
     controller->setPlayerWindow(this);
-    controller->setGraphicsView(ui->graphicsView);
+    controller->setGraphicsView(graphics_view_);
 
     boost::thread m_t(&pdr::Controller::play, controller) ;
 }
@@ -69,11 +43,12 @@ void PlayerWindow::getPlayerEndSignal()
 {
     qDebug() << "End" ;
     pdr::Controller::freeInstance() ;
-    QApplication::quit() ;
+    //QApplication::quit() ;
 }
 
 PlayerWindow::~PlayerWindow()
 {
     delete ui;
-    delete scene_ ;
+    delete graphics_view_ ;
 }
+

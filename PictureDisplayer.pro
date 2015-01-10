@@ -41,7 +41,9 @@ SOURCES +=  \
     src/Component/PictureComponent.cpp \
     src/PlayerWindow.cpp \
     src/Controller.cpp \
-    src/Button/PlayPauseBtn.cpp
+    src/PlayerLayout/PlayPauseBtn.cpp \
+    src/PlayerLayout/GraphicsView.cpp \
+    src/PlayerLayout/CloseBtn.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -55,7 +57,9 @@ HEADERS +=  \
     include/Frame.h \
     include/Controller.h \
     include/PdrBasic.h \
-    include/Button/PlayPauseBtn.h
+    include/PlayerLayout/PlayPauseBtn.h \
+    include/PlayerLayout/GraphicsView.h \
+    include/PlayerLayout/CloseBtn.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

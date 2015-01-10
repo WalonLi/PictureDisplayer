@@ -8,10 +8,8 @@
 #define PLAYER_WINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsView>
-#include <QGraphicsScene>
 #include "ui_Player.h"
-#include "Button/PlayPauseBtn.h"
+#include "PlayerLayout/GraphicsView.h"
 
 namespace Ui {
 class Player;
@@ -33,8 +31,7 @@ private slots:
 
 private:
     Ui::Player *ui;
-    QGraphicsScene *scene_;
-    pdr::PlayPauseBtn *pp_btn_;
+    pdr::GraphicsView *graphics_view_ ;
 } ;
 
 #endif // MAINWINDOW_H
