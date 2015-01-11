@@ -14,6 +14,11 @@ QT Creator as recommended.
 $ sudo apt-get install libglu1-mesa-dev -y
 ```
 
+#### GStreamer
+```bash
+sudo apt-get install gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly gstreamer0.10-fluendo-mp3
+```
+
 #### Boost 1.57.0
 [Download and install](http://www.boost.org/)
 
@@ -39,4 +44,6 @@ $ mkdir build
 $ cd build/
 $ qmake ..
 $ make
+$ export LD_LIBRARY_PATH=/usr/lib/boost_lib:$LD_LIBRARY_PATH
+$ ./PictureDisplayer
 ```
