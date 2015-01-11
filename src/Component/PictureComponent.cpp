@@ -31,8 +31,8 @@ pdr::PictureComponent::PictureComponent(QImage *i, Scale s, Effective *e):
 
 // void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::PictureComponent::paint(QPainter *painter,
-                                  const QStyleOptionGraphicsItem *option,
-                                  QWidget *widget)
+                                  const QStyleOptionGraphicsItem *,
+                                  QWidget *)
 {
     qreal width = (image_->width() > 800) ? 800 : image_->width() ;
     qreal height = (image_->height() > 600) ? 600 : image_->height() ;

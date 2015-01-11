@@ -26,13 +26,24 @@ class Controller : public IPlay
 {
 public:
     static pdr::Controller * getInstance();
-    static pdr::Controller * freeInstance();
+    static void freeInstance();
 
+    enum state
+    {
+        CTRL_PLAY = 0,
+        CTRL_PAUSE,
+        CTRL_STOP,
+    };
+
+    // Add method
     void addFrame(pdr::Frame *frame);
 
     template <typename Iterator>
     void addFrame(Iterator first, Iterator last);
 
+
+
+    // Set method
     void setBGColor(QColor c)
     {
         bg_color_ = c;
@@ -52,6 +63,9 @@ public:
     void setSelectorWindow(SelectorWindow *w) { s_window_ = w; }
     void setPlayerWindow(PlayerWindow *w) { p_window_ = w; }
 
+
+
+    // Get method
     QColor getBGColor() const { return bg_color_; }
 
     QMediaContent getBGMusic() const
@@ -60,8 +74,10 @@ public:
     }
 
     QGraphicsView *getGraphicsView() const { return view_; }
+    state getState() const { return state_; }
 
     void play() ;
+    void pause_continue() ;
     void stop() ;
     void forward(){}
     void backward(){}
@@ -80,6 +96,9 @@ private:
 
     QColor bg_color_ ;
     QMediaPlayer bg_music_player_ ;
+
+    // controller state
+    state state_ ;
 
     // Belong to view systme, don't free it.
     QGraphicsView *view_ ;

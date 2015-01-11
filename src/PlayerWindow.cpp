@@ -18,7 +18,7 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // connect signal
-    QObject::connect(this, SIGNAL(sendPlayerEndSignal()), this, SLOT(getPlayerEndSignal())) ;
+    QObject::connect(this, SIGNAL(playerEndSignal()), this, SLOT(playerEndSlot())) ;
 
     // set not frame less
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -32,7 +32,6 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     // graphics_view_->setMouseTracking(true);
 
 
-
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
     controller->setPlayerWindow(this);
@@ -41,12 +40,30 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     boost::thread m_t(&pdr::Controller::play, controller) ;
 }
 
-void PlayerWindow::getPlayerEndSignal()
+void PlayerWindow::playerEndSlot()
 {
     qDebug() << "End" ;
     pdr::Controller::freeInstance() ;
-    //QApplication::quit() ;
+    QApplication::quit() ;
 }
+
+void PlayerWindow::closeBtnClickSlot()
+{
+    qDebug() << "Close btn clicked" ;
+    pdr::Controller::freeInstance() ;
+    QApplication::quit() ;
+}
+
+void PlayerWindow::ppBtnClickSlot()
+{
+    qDebug() << "Play ause btn clicked" ;
+    pdr::Controller *controller = pdr::Controller::getInstance();
+    controller->pause_continue();
+
+    bool flag = (controller->getState() == pdr::Controller::CTRL_PAUSE) ? true : false ;
+    graphics_view_->getPlayPauseBtn()->setBtnPixmap(flag);
+}
+
 
 PlayerWindow::~PlayerWindow()
 {

@@ -9,11 +9,10 @@
 
 #include <QImage>
 #include <QPainter>
-#include <QGraphicsItem>
 #include <QRectF>
-#include <QPushButton>
 #include <QBitmap>
 #include <QIcon>
+#include <QAbstractButton>
 
 namespace pdr
 {
@@ -26,13 +25,10 @@ public :
 
     void paintEvent(QPaintEvent*) ;
     QSize sizeHint() const ;
-protected:
-    // Override paint event.
-    // void paintEvent(QPaintEvent *event) ;
 
 private :
     QPixmap pixmap_ ;
-    QIcon icon_ ;
+    // QIcon icon_ ;
 } ;
 }
 #endif

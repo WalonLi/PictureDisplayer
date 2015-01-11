@@ -18,6 +18,7 @@ pdr::Controller::Controller()
       threads_(),
       bg_color_(DEFAULT_BG_COLOR),
       bg_music_player_(),
+      state_(CTRL_STOP),
       view_(0),
       s_window_(0),
       p_window_(0)
@@ -65,7 +66,7 @@ pdr::Controller * pdr::Controller::getInstance()
     return instance ;
 }
 
-pdr::Controller * pdr::Controller::freeInstance()
+void pdr::Controller::freeInstance()
 {
     if (instance) delete instance ;
     instance = NULL ;
@@ -79,6 +80,7 @@ void pdr::Controller::addFrame(Frame *frame)
 void pdr::Controller::play()
 {
     qDebug() << "I'm playing" ;
+    state_ = CTRL_PLAY ;
 
     // Set background color
     view_->setBackgroundBrush(bg_color_);
@@ -122,9 +124,28 @@ void pdr::Controller::play()
 
     bg_music_player_.stop();
     // once play is done, emit siganl to PlayerWindow(choose replay or another)
-    if (p_window_) emit p_window_->sendPlayerEndSignal();
+    if (p_window_) emit p_window_->playerEndSignal();
+}
+
+void pdr::Controller::pause_continue()
+{
+
+    if (state_ == CTRL_PLAY)
+    {
+        // pause
+        // boost::thread t = threads_.at(0) ;
+        bg_music_player_.pause();
+        state_ = CTRL_PAUSE ;
+    }
+    else if (state_ == CTRL_PAUSE)
+    {
+        // continue
+        bg_music_player_.play();
+        state_ = CTRL_PLAY ;
+    }
 }
 
 void pdr::Controller::stop()
 {
+    state_ = CTRL_STOP ;
 }

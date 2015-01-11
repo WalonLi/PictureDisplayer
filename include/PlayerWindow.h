@@ -24,10 +24,14 @@ public:
     ~PlayerWindow();
 
 signals:
-    void sendPlayerEndSignal() ;
+    void playerEndSignal() ;
+
 
 private slots:
-    void getPlayerEndSignal() ;
+    void playerEndSlot() ;
+    void closeBtnClickSlot() ;
+    void ppBtnClickSlot() ;
+    // void ppBtnChangeIconSlot() ;
 
 private:
     Ui::Player *ui;

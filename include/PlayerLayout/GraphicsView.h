@@ -29,6 +29,9 @@ public :
     //void mouseMoveEvent(QMouseEvent *) ;
     void hideButton() ;
     void timerEvent(QTimerEvent *) ;
+
+    PlayPauseBtn *getPlayPauseBtn() {return pp_btn_ ;}
+    CloseBtn *getCloseBtn() {return close_btn_ ;}
 protected:
     // Override paint event.
     // void paintEvent(QPaintEvent *event) ;

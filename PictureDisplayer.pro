@@ -32,6 +32,7 @@ win32-g++* {
     QMAKE_LFLAGS_CONSOLE =
 }
 
+
 CONFIG  +=  c++11
 #DEFINES += STATIC
 
