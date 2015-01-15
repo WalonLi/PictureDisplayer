@@ -29,6 +29,13 @@ pdr::PictureComponent::PictureComponent(QImage *i, Scale s, Effective *e):
     }
 }
 
+pdr::PictureComponent::~PictureComponent()
+{
+    delete image_ ;
+    delete effect_ ;
+}
+
+
 // void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::PictureComponent::paint(QPainter *painter,
                                   const QStyleOptionGraphicsItem *,

@@ -37,6 +37,12 @@ pdr::PlayPauseBtn::PlayPauseBtn(QWidget *parent):
 
 }
 
+void pdr::PlayPauseBtn::setBtnPixmap(bool flag)
+{
+    pixmap_ = flag ? play_pixmap_ : pause_pixmap_ ;
+    update() ;
+}
+
 void pdr::PlayPauseBtn::paintEvent(QPaintEvent *)
 {
     QPainter p(this) ;

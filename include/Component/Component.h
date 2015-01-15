@@ -22,7 +22,8 @@ public :
     explicit Component(QObject *w) : IPlay(), QGraphicsItem(NULL), base_obj_(w), duration_(0){}
     virtual ~Component(){}
 
-    QObject* getBaseObj() { return base_obj_ ; }
+    QObject* getBaseObj() const { return base_obj_ ; }
+
     void setDuration(std::chrono::milliseconds d){ duration_ = d;}
     std::chrono::milliseconds & getDuration() {return duration_ ;}
 

@@ -50,15 +50,8 @@ public:
         if (view_) view_->setBackgroundBrush(bg_color_);
     }
 
-    void setBGMusic(std::string s)
-    {
-        bg_music_player_.setMedia(QMediaContent(QUrl::fromLocalFile(s.c_str()))) ;
-    }
-    void setBGMusic(QMediaContent media)
-    {
-        bg_music_player_.setMedia(media) ;
-    }
-
+    void setBGMusic(std::string s) {bg_music_player_.setMedia(QMediaContent(QUrl::fromLocalFile(s.c_str())));}
+    void setBGMusic(QMediaContent media) {bg_music_player_.setMedia(media);}
     void setGraphicsView(QGraphicsView *v) { view_ = v; }
     void setSelectorWindow(SelectorWindow *w) { s_window_ = w; }
     void setPlayerWindow(PlayerWindow *w) { p_window_ = w; }
@@ -67,12 +60,7 @@ public:
 
     // Get method
     QColor getBGColor() const { return bg_color_; }
-
-    QMediaContent getBGMusic() const
-    {
-        return bg_music_player_.currentMedia();
-    }
-
+    QMediaContent getBGMusic() const {return bg_music_player_.currentMedia();}
     QGraphicsView *getGraphicsView() const { return view_; }
     state getState() const { return state_; }
 

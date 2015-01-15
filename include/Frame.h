@@ -14,12 +14,8 @@ namespace pdr
 class Frame
 {
 public:
-    explicit Frame(std::chrono::milliseconds d) : duration_(d) {}
-    ~Frame()
-    {
-        for (auto it = components_.begin() ; it != components_.end() ; ++it)
-            delete *it ;
-    }
+    explicit Frame(std::chrono::milliseconds d) ;
+    ~Frame() ;
 
     void addComponent(Component *c){ components_.push_back(c); }
     void addComponent(std::vector<Component*> & c)
@@ -27,11 +23,11 @@ public:
         components_.insert(components_.end(), c.begin(), c.end());
     }
 
-    size_t getComponentsCount () { return components_.size() ;}
-    std::vector<Component*> & getComponents(){ return components_ ; }
-    Component* getComponent(int i){ return components_[i] ;}
+    size_t getComponentsCount () const { return components_.size() ;}
+    std::vector<Component*> & getComponents() {return components_;}
+    Component* getComponent(int i) const { return components_[i] ;}
 
-    std::chrono::milliseconds getDuration() const { return duration_ ; }
+    std::chrono::milliseconds getDuration() const {return duration_;}
 
 private:
     std::vector<Component*> components_ ;

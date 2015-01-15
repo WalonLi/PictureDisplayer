@@ -22,16 +22,12 @@ class PlayPauseBtn : public QAbstractButton
 
 public :
     explicit PlayPauseBtn(QWidget *parent=0);
-    virtual ~PlayPauseBtn(){}
+    virtual ~PlayPauseBtn(){};
 
     void paintEvent(QPaintEvent*) ;
     QSize sizeHint() const ;
 
-    void setBtnPixmap(bool flag)
-    {
-        pixmap_ = flag ? play_pixmap_ : pause_pixmap_ ;
-        update() ;
-    }
+    void setBtnPixmap(bool flag) ;
 
 private :
     QPixmap pixmap_ ;

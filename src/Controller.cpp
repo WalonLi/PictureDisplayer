@@ -8,6 +8,7 @@
 #include "include/Component/PictureComponent.h"
 #include <QTest>
 #include <QBitmap>
+#include <boost/date_time.hpp>
 //#include <QMultimedia>
 
 pdr::Controller* pdr::Controller::instance = NULL ;
@@ -133,7 +134,8 @@ void pdr::Controller::pause_continue()
     if (state_ == CTRL_PLAY)
     {
         // pause
-        // boost::thread t = threads_.at(0) ;
+        boost::thread *t = threads_.at(0) ;
+        //t->sleep(boost::posix_time::milliseconds(5000));
         bg_music_player_.pause();
         state_ = CTRL_PAUSE ;
     }
