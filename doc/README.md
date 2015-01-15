@@ -16,7 +16,10 @@
 ----
 
 # History
-## 14/01/08
+## 15/01/15
+1. We don't have good idea with Pause/Continue feature now.  
+
+## 15/01/08
 1. Simple controller is done, it can play two pictures and background music
 
 ## 14/12/31
