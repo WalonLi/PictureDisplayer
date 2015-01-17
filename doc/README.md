@@ -1,11 +1,10 @@
 # Known Issue or Something
 
 1. Transparent player window and button(Limitation now, please see 1/2 history)
-2. Controller
-3. Finish Spinner bar(Selector->Player animation)
-4. Parser and FileSelector
-5. Pause and Continue in Player
-6. Run fail with QT5.4
+2. Finish Spinner bar(Selector->Player animation)
+3. Parser and FileSelector
+4. How to integrate effective into Picture Component instead of write new component.
+4. Run fail with QT5.4
 
 ----
 
@@ -16,6 +15,10 @@
 ----
 
 # History
+## 15/01/18
+1. Finish pause/resume feature, works good :)
+2. Understand how to do a animation(see PictureComponent.cpp)
+
 ## 15/01/15
 1. We don't have good idea with Pause/Continue feature now.  
 
