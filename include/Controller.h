@@ -11,22 +11,22 @@
 #include <QGraphicsView>
 #include <QDebug>
 #include <QColor>
+#include <QThread>
 #include <QMediaPlayer>
-#include <QMediaPlaylist>
 #include <QDir>
 #include "Frame.h"
 #include "IPlay.h"
 #include "PlayerWindow.h"
 #include "SelectorWindow.h"
-#include "PdrBasic.h"
+
 
 namespace pdr
 {
+
 class Controller : public IPlay
 {
 public:
     static pdr::Controller * getInstance();
-    static void freeInstance();
 
     enum state
     {
@@ -72,7 +72,6 @@ public:
     void backward(){}
 
     void resetFrames() ;
-    void resetThreads() ;
 
 private:
     Controller();
@@ -81,7 +80,6 @@ private:
 
 private:
     std::vector<pdr::Frame*> frames_ ;
-    std::vector<boost::thread*> threads_ ;
 
     QColor bg_color_ ;
     QMediaPlayer bg_music_player_ ;
@@ -93,9 +91,6 @@ private:
     QGraphicsView *view_ ;
     SelectorWindow *s_window_ ;
     PlayerWindow *p_window_ ;
-
-    // controller instance
-    static pdr::Controller *instance_ ;
 };
 }
 

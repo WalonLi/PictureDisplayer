@@ -58,10 +58,10 @@ HEADERS +=  \
     include/PlayerWindow.h \
     include/Frame.h \
     include/Controller.h \
-    include/PdrBasic.h \
     include/PlayerLayout/PlayPauseBtn.h \
     include/PlayerLayout/GraphicsView.h \
-    include/PlayerLayout/CloseBtn.h
+    include/PlayerLayout/CloseBtn.h \
+    include/PlayThread.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

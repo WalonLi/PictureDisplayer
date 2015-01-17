@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QRectF>
+#include <QTimerEvent>
 #include "Component.h"
 #include "../Effective/Effective.h"
 
@@ -44,6 +45,7 @@ public :
 
     // override QGraphicsItem function
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) ;
+    void timerEvent(QTimerEvent*);
     QRectF boundingRect() const ;
 protected:
     // Override paint event.

@@ -8,13 +8,12 @@
 #define IPLAY_H
 
 #include <QDebug>
-
 namespace pdr
 {
 class IPlay 
 {
 public:
-    IPlay(){}
+    IPlay():pause_flag_(false){}
     virtual ~IPlay(){}
     virtual void play() = 0 ;
     virtual void pause() = 0 ;
@@ -22,6 +21,8 @@ public:
     virtual void stop() = 0 ;
     virtual void forward() = 0 ;
     virtual void backward() = 0 ;
+protected:
+    bool pause_flag_ ;
 } ;
 }
 #endif

@@ -11,7 +11,7 @@
 #include <QDebug>
 #include <QGraphicsItem>
 #include <thread>
-#include <chrono>
+#include <boost/chrono.hpp>
 #include "../IPlay.h"
 
 namespace pdr
@@ -24,8 +24,8 @@ public :
 
     QObject* getBaseObj() const { return base_obj_ ; }
 
-    void setDuration(std::chrono::milliseconds d){ duration_ = d;}
-    std::chrono::milliseconds & getDuration() {return duration_ ;}
+    void setDuration(boost::chrono::milliseconds d){ duration_ = d;}
+    boost::chrono::milliseconds & getDuration() {return duration_ ;}
 
     virtual void play(){}
     virtual void pause(){}
@@ -35,7 +35,7 @@ public :
     virtual void backward(){}
 private :
     QObject *base_obj_ ;
-    std::chrono::milliseconds duration_ ;
+    boost::chrono::milliseconds duration_ ;
 } ;
 }
 #endif

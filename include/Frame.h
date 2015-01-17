@@ -4,7 +4,7 @@
     File Frame.h
 **/
 
-#include <chrono>
+#include <boost/chrono.hpp>
 #include <vector>
 #include <QDebug>
 #include "Component/Component.h"
@@ -14,7 +14,7 @@ namespace pdr
 class Frame
 {
 public:
-    explicit Frame(std::chrono::milliseconds d) ;
+    explicit Frame(boost::chrono::milliseconds d) ;
     ~Frame() ;
 
     void addComponent(Component *c){ components_.push_back(c); }
@@ -27,10 +27,10 @@ public:
     std::vector<Component*> & getComponents() {return components_;}
     Component* getComponent(int i) const { return components_[i] ;}
 
-    std::chrono::milliseconds getDuration() const {return duration_;}
+    boost::chrono::milliseconds getDuration() const {return duration_;}
 
 private:
     std::vector<Component*> components_ ;
-    std::chrono::milliseconds duration_ ;
+    boost::chrono::milliseconds duration_ ;
 };
 }

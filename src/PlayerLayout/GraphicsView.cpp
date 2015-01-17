@@ -7,18 +7,15 @@
 #include <QDebug>
 #include <QPainter>
 #include <QScrollBar>
-//#include <QTest>
 #include <boost/thread.hpp>
-#include <chrono>
-//#include <QMutex>
 #include "include/PlayerLayout/GraphicsView.h"
 
 
 pdr::GraphicsView::GraphicsView(QWidget *parent):
     QGraphicsView(parent),
     scene_(new QGraphicsScene()),
-    pp_btn_(new PlayPauseBtn(this)),
-    close_btn_(new CloseBtn(this)),
+    pp_btn_(NULL),
+    close_btn_(NULL),
     hide_btn_thread_(NULL)
 {
     scene_->setSceneRect(0,0,800,600);
@@ -30,17 +27,17 @@ pdr::GraphicsView::GraphicsView(QWidget *parent):
     this->setScene(scene_);
 
     // button default is hidden
-    pp_btn_->hide();
-    close_btn_->hide();
+    // pp_btn_->hide();
+    // close_btn_->hide();
 
     // this timer will check cursor move or not
-    this->startTimer(1000) ;
+    this->startTimer(500) ;
 
 }
 
 pdr::GraphicsView::~GraphicsView()
 {
-    hide_btn_thread_->interrupt();
+    if (hide_btn_thread_) hide_btn_thread_->interrupt();
     delete hide_btn_thread_ ;
     delete scene_;
     delete pp_btn_ ;
@@ -49,8 +46,6 @@ pdr::GraphicsView::~GraphicsView()
 
 void pdr::GraphicsView::hideButton()
 {
-    if (pp_btn_->isHidden() || close_btn_->isHidden()) return ;
-
     volatile static u_int count ;
     count = 0 ;
 
@@ -59,9 +54,10 @@ void pdr::GraphicsView::hideButton()
         boost::this_thread::sleep_for(boost::chrono::milliseconds(100)) ;
         count++ ;
     }
-    //delete pp_btn_ ;
-    pp_btn_->hide(); ;
-    close_btn_->hide();
+    delete pp_btn_ ;
+    delete close_btn_ ;
+    pp_btn_ = NULL ;
+    close_btn_ = NULL ;
 }
 
 void pdr::GraphicsView::timerEvent(QTimerEvent*)
@@ -77,8 +73,15 @@ void pdr::GraphicsView::timerEvent(QTimerEvent*)
     {
         org = mod ;
 
-        pp_btn_->show();
-        close_btn_->show();
+        if (!pp_btn_ || !close_btn_)
+        {
+            pp_btn_ = new PlayPauseBtn(this) ;
+            close_btn_ = new CloseBtn(this) ;
+            pp_btn_->show();
+            close_btn_->show();
+            this->scene()->update();
+        }
+
         if (hide_btn_thread_)
         {
             hide_btn_thread_->interrupt();

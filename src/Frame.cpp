@@ -5,7 +5,7 @@
 **/
 
 #include "include/Frame.h"
-pdr::Frame::Frame(std::chrono::milliseconds d)
+pdr::Frame::Frame(boost::chrono::milliseconds d)
     : duration_(d)
 {
 }

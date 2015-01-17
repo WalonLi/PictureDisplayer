@@ -8,16 +8,13 @@
 #include "include/Component/PictureComponent.h"
 #include <QTest>
 #include <QBitmap>
-#include <boost/date_time.hpp>
+#include <boost/chrono.hpp>
 //#include <QMultimedia>
-
-pdr::Controller* pdr::Controller::instance_ = NULL ;
 
 pdr::Controller::Controller()
     : IPlay(),
       frames_(),
-      threads_(),
-      bg_color_(DEFAULT_BG_COLOR),
+      bg_color_(QColor(0, 0xff, 0, 30)),
       bg_music_player_(),
       state_(CTRL_STOP),
       view_(0),
@@ -28,20 +25,7 @@ pdr::Controller::Controller()
 
 pdr::Controller::~Controller()
 {
-    for (auto it = frames_.begin() ; it != frames_.end() ; ++it)
-        delete *it ;
-
-    /*
-    while (this->frames_.size()) {
-        delete this->frames_.back();
-        this->frames_.pop_back();
-    }
-    while (this->threads_.size()) {
-        this->threads_.back()->interrupt() ;
-        delete this->threads_.back();
-        this->threads_.pop_back();
-    }
-    */
+    this->resetFrames() ;
 }
 
 void pdr::Controller::resetFrames()
@@ -52,25 +36,10 @@ void pdr::Controller::resetFrames()
     }
 }
 
-void pdr::Controller::resetThreads()
-{
-    while (this->threads_.size()) {
-        this->threads_.back()->interrupt() ;
-        delete this->threads_.back();
-        this->threads_.pop_back();
-    }
-}
-
 pdr::Controller * pdr::Controller::getInstance()
 {
-    if (!instance_) instance_ = new pdr::Controller() ;
-    return instance_ ;
-}
-
-void pdr::Controller::freeInstance()
-{
-    if (instance_) delete instance_ ;
-    instance_ = NULL ;
+    static pdr::Controller instance ;
+    return &instance ;
 }
 
 void pdr::Controller::addFrame(Frame *frame)
@@ -97,31 +66,33 @@ void pdr::Controller::play()
     {
         // add component to scene and make its thread
         std::vector<Component*> comps = (*it)->getComponents() ;
-        std::chrono::milliseconds duration = (*it)->getDuration() ;
+        boost::chrono::milliseconds duration = (*it)->getDuration() ;
         for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
         {
             (*it2)->setDuration(duration) ;
             scene->addItem(*it2);
             scene->update();
-            boost::thread *comp_t = new boost::thread(&Component::play, *it2) ;
-            threads_.push_back(comp_t);
+            (*it2)->play() ;
             (*it2)->update() ;
         }
 
-
-        // wait for all thread
-        for (auto it2 = threads_.begin() ; it2 != threads_.end() ; ++it2)
-            (*it2)->join();
-
-        // reset thread for next use
-        this->resetThreads() ;
+        // start to play...
+        duration /= 50 ;
+        int count = 0 ;
+        while (count < duration.count())
+        {
+            if (!pause_flag_)
+            {
+                boost::this_thread::sleep_for(boost::chrono::milliseconds(50)) ;
+                count++ ;
+                scene->update();
+            }
+        }
 
         // removes components
         for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
-        {
             scene->removeItem(*it2);
-            scene->update();
-        }
+        scene->update();
     }
 
     bg_music_player_.stop();
@@ -131,34 +102,36 @@ void pdr::Controller::play()
 
 void pdr::Controller::pause()
 {
-
+    QList<QGraphicsItem*> lst = view_->scene()->items() ;
+    for (auto it = lst.begin() ; it != lst.end() ; ++it)
+        if (Component* comp = dynamic_cast<Component*>(*it))
+            comp->pause();
+        //((pdr::IPlay*)*it)->pause ;
     bg_music_player_.pause();
-    /*
-    if (state_ == CTRL_PLAY)
-    {
-        // pause
-        boost::thread *t = threads_.at(0) ;
-        //t->sleep(boost::posix_time::milliseconds(5000));
-        bg_music_player_.pause();
-        state_ = CTRL_PAUSE ;
-    }
-    else if (state_ == CTRL_PAUSE)
-    {
-        // continue
-        bg_music_player_.play();
-        state_ = CTRL_PLAY ;
-    }
-    */
+
+    pause_flag_ = true ;
     state_ = CTRL_PAUSE ;
 }
 
 void pdr::Controller::resume()
 {
+    QList<QGraphicsItem*> lst = view_->scene()->items() ;
+    for (auto it = lst.begin() ; it != lst.end() ; ++it)
+        if (Component* comp = dynamic_cast<Component*>(*it))
+            comp->resume();
     bg_music_player_.play() ;
+    pause_flag_ = false ;
     state_ = CTRL_PLAY ;
 }
 
 void pdr::Controller::stop()
 {
     state_ = CTRL_STOP ;
+    QList<QGraphicsItem*> lst = view_->scene()->items() ;
+    for (auto it = lst.begin() ; it != lst.end() ; ++it)
+        if (Component* comp = dynamic_cast<Component*>(*it))
+        {
+            comp->stop();
+            view_->scene()->removeItem(comp);
+        }
 }

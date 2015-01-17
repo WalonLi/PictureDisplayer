@@ -7,6 +7,8 @@
 #include "include/Component/PictureComponent.h"
 #include <QDebug>
 #include <QStyleOptionGraphicsItem>
+#include <boost/thread.hpp>
+#include <QThread>
 
 
 pdr::PictureComponent::PictureComponent(QImage *i, Scale s, Effective *e):
@@ -33,8 +35,33 @@ pdr::PictureComponent::~PictureComponent()
 {
     delete image_ ;
     delete effect_ ;
+
 }
 
+void pdr::PictureComponent::timerEvent(QTimerEvent* e)
+{
+    // qDebug() << "timerEvent" ;
+    // static int count = 0 ;
+    if (pause_flag_)
+    {
+        this->killTimer(e->timerId());
+    }
+    else
+    {
+        /*
+        // draw animation
+        count++ ;
+        if (count == 1)
+            this->moveBy(10,10);
+        else if (count == 2)
+            this->moveBy(10,10);
+        else if (count == 3)
+            this->moveBy(-10,-10);
+        else if (count == 4)
+            this->moveBy(-10,-10);
+        */
+    }
+}
 
 // void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::PictureComponent::paint(QPainter *painter,
@@ -43,9 +70,6 @@ void pdr::PictureComponent::paint(QPainter *painter,
 {
     qreal width = (image_->width() > 800) ? 800 : image_->width() ;
     qreal height = (image_->height() > 600) ? 600 : image_->height() ;
-    // qDebug() << width << height ;
-    // this->setPos(QPointF((800-width)/2, (600-height)/2));
-    // painter->drawImage(0, 0, *image);
     painter->drawImage((800-width)/2, (600-height)/2, *image_);
 }
 
@@ -56,24 +80,25 @@ QRectF pdr::PictureComponent::boundingRect() const
 
 void pdr::PictureComponent::play()
 {
-    //QTest::qWait(5000) ;
-    std::this_thread::sleep_for(this->getDuration()) ;
+    this->startTimer(100) ;
 }
 
 void pdr::PictureComponent::pause()
 {
-    //QTest::qWait(5000) ;
-    // std::this_thread::sleep_for(this->getDuration()) ;
+    // qDebug() << "Picture pasue" ;
+    pause_flag_ = true ;
 }
 
 void pdr::PictureComponent::resume()
 {
-    // QTest::qWait(5000) ;
-    // std::this_thread::sleep_for(this->getDuration()) ;
+    // qDebug() << "Picture resume" ;
+    pause_flag_ = false ;
+    this->startTimer(100) ;
 }
 
 void pdr::PictureComponent::stop()
 {
+    // this->thread()->exit();
 }
 
 

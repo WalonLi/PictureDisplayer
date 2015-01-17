@@ -37,20 +37,18 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     controller->setPlayerWindow(this);
     controller->setGraphicsView(graphics_view_);
 
-    boost::thread m_t(&pdr::Controller::play, controller) ;
+    //boost::thread m_t(&pdr::Controller::play, controller) ;
 }
 
 void PlayerWindow::playerEndSlot()
 {
     qDebug() << "End" ;
-    pdr::Controller::freeInstance() ;
     QApplication::quit() ;
 }
 
 void PlayerWindow::closeBtnClickSlot()
 {
-    qDebug() << "Close btn clicked" ;
-    pdr::Controller::freeInstance() ;
+    pdr::Controller::getInstance()->stop();
     QApplication::quit() ;
 }
 
@@ -63,12 +61,12 @@ void PlayerWindow::ppBtnClickSlot()
     if (controller->getState() == pdr::Controller::CTRL_PAUSE)
     {
         controller->resume();
-        graphics_view_->getPlayPauseBtn()->setBtnPixmap(true);
+        graphics_view_->getPlayPauseBtn()->setBtnPixmap(false);
     }
     else if (controller->getState() == pdr::Controller::CTRL_PLAY)
     {
         controller->pause();
-        graphics_view_->getPlayPauseBtn()->setBtnPixmap(false);
+        graphics_view_->getPlayPauseBtn()->setBtnPixmap(true);
     }
 }
 
