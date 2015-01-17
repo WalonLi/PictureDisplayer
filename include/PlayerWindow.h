@@ -8,9 +8,8 @@
 #define PLAYER_WINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsView>
-#include <QGraphicsScene>
 #include "ui_Player.h"
+#include "PlayerLayout/GraphicsView.h"
 
 namespace Ui {
 class Player;
@@ -25,14 +24,18 @@ public:
     ~PlayerWindow();
 
 signals:
-    void sendPlayerEndSignal() ;
+    void playerEndSignal() ;
+
 
 private slots:
-    void getPlayerEndSignal() ;
+    void playerEndSlot() ;
+    void closeBtnClickSlot() ;
+    void ppBtnClickSlot() ;
+    // void ppBtnChangeIconSlot() ;
 
 private:
     Ui::Player *ui;
-    QGraphicsScene *scene_;
+    pdr::GraphicsView *graphics_view_ ;
 } ;
 
 #endif // MAINWINDOW_H

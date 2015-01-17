@@ -5,55 +5,75 @@
 **/
 
 
-#include <QPushButton>
-#include <QImage>
 #include <QDebug>
-#include <QScrollBar>
 #include "include/Controller.h"
 #include "include/PlayerWindow.h"
-#include "include/Component/PictureComponent.h"
 
 PlayerWindow::PlayerWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Player),
-    scene_(new QGraphicsScene())
+    graphics_view_(NULL)
 {
     this->setFixedSize(800, 600);
     ui->setupUi(this);
 
     // connect signal
-    QObject::connect(this, SIGNAL(sendPlayerEndSignal()), this, SLOT(getPlayerEndSignal())) ;
-
-    // set scene and block wheel signal
-    ui->graphicsView->setScene(scene_);
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->verticalScrollBar()->blockSignals(true) ;
-    ui->graphicsView->horizontalScrollBar()->blockSignals(true) ;
+    QObject::connect(this, SIGNAL(playerEndSignal()), this, SLOT(playerEndSlot())) ;
 
     // set not frame less
     this->setWindowFlags(Qt::FramelessWindowHint);
 
-    // set static scene size
-    scene_->setSceneRect(0,0,800,600);
+    // set graphics view
+    graphics_view_ = new pdr::GraphicsView(ui->centralWidget) ;
+
+    // set mouse track
+    // this->setMouseTracking(true);
+    // ui->centralWidget->setMouseTracking(true);
+    // graphics_view_->setMouseTracking(true);
+
 
     // set controller
     pdr::Controller *controller = pdr::Controller::getInstance();
     controller->setPlayerWindow(this);
-    controller->setGraphicsView(ui->graphicsView);
+    controller->setGraphicsView(graphics_view_);
 
-    boost::thread m_t(&pdr::Controller::play, controller) ;
+    //boost::thread m_t(&pdr::Controller::play, controller) ;
 }
 
-void PlayerWindow::getPlayerEndSignal()
+void PlayerWindow::playerEndSlot()
 {
     qDebug() << "End" ;
-    pdr::Controller::freeInstance() ;
     QApplication::quit() ;
 }
+
+void PlayerWindow::closeBtnClickSlot()
+{
+    pdr::Controller::getInstance()->stop();
+    QApplication::quit() ;
+}
+
+void PlayerWindow::ppBtnClickSlot()
+{
+    qDebug() << "Play ause btn clicked" ;
+
+    pdr::Controller *controller = pdr::Controller::getInstance();
+
+    if (controller->getState() == pdr::Controller::CTRL_PAUSE)
+    {
+        controller->resume();
+        graphics_view_->getPlayPauseBtn()->setBtnPixmap(false);
+    }
+    else if (controller->getState() == pdr::Controller::CTRL_PLAY)
+    {
+        controller->pause();
+        graphics_view_->getPlayPauseBtn()->setBtnPixmap(true);
+    }
+}
+
 
 PlayerWindow::~PlayerWindow()
 {
     delete ui;
-    delete scene_ ;
+    delete graphics_view_ ;
 }
+

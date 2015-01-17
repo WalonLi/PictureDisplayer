@@ -32,6 +32,7 @@ win32-g++* {
     QMAKE_LFLAGS_CONSOLE =
 }
 
+
 CONFIG  +=  c++11
 #DEFINES += STATIC
 
@@ -40,7 +41,11 @@ SOURCES +=  \
     src/SelectorWindow.cpp \
     src/Component/PictureComponent.cpp \
     src/PlayerWindow.cpp \
-    src/Controller.cpp
+    src/Controller.cpp \
+    src/PlayerLayout/PlayPauseBtn.cpp \
+    src/PlayerLayout/GraphicsView.cpp \
+    src/PlayerLayout/CloseBtn.cpp \
+    src/Frame.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -53,7 +58,10 @@ HEADERS +=  \
     include/PlayerWindow.h \
     include/Frame.h \
     include/Controller.h \
-    include/PdrBasic.h
+    include/PlayerLayout/PlayPauseBtn.h \
+    include/PlayerLayout/GraphicsView.h \
+    include/PlayerLayout/CloseBtn.h \
+    include/PlayThread.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

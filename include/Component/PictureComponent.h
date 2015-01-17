@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QRectF>
+#include <QTimerEvent>
 #include "Component.h"
 #include "../Effective/Effective.h"
 
@@ -29,24 +30,22 @@ public :
 
 
     explicit PictureComponent(QImage *i, Scale s = Scale::None, Effective *e = NULL) ;
-
-    virtual ~PictureComponent()
-    {
-        delete image_ ;
-        delete effect_ ;
-    }
+    virtual ~PictureComponent() ;
 
 
     // PictureComponent.cpp implement it.
     void play() ;
+    void pause() ;
+    void resume() ;
     void stop() ;
 
-    QImage* getImage() {return image_ ;}
-    Effective* getEffective() {return effect_ ;}
+    QImage* getImage() const {return image_ ;}
+    Effective* getEffective() const {return effect_ ;}
 
 
     // override QGraphicsItem function
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) ;
+    void timerEvent(QTimerEvent*);
     QRectF boundingRect() const ;
 protected:
     // Override paint event.

@@ -7,11 +7,12 @@
 #include "include/SelectorWindow.h"
 #include "include/PlayerWindow.h"
 #include "include/Controller.h"
+#include "include/PlayThread.h"
 #include "include/Component/PictureComponent.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
-#include <chrono>
+#include <boost/chrono.hpp>
 
 void MoveToCenter(QMainWindow& w)
 {
@@ -42,25 +43,25 @@ int main(int argc, char *argv[])
     */
 
     // below code to make a parser
-    controller->setBGMusic(QDir::currentPath().toStdString() + "/../music/bg_music.mp3");
+    controller->setBGMusic(QDir::currentPath().toStdString() + "/music/bg_music.mp3");
 
-    pdr::Frame *frame1 = new pdr::Frame(std::chrono::milliseconds(2000)) ;
-    frame1->addComponent(new pdr::PictureComponent(new QImage("../image/walon.jpg"),
+    pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
+    frame1->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
                                                   pdr::PictureComponent::IgnoreAspecRatio));
 
-    pdr::Frame *frame2 = new pdr::Frame(std::chrono::milliseconds(2000)) ;
-    frame2->addComponent(new pdr::PictureComponent(new QImage("../image/walon2.jpg")));
+    pdr::Frame *frame2 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
+    frame2->addComponent(new pdr::PictureComponent(new QImage("image/walon2.jpg")));
 
     controller->addFrame(frame1);
     controller->addFrame(frame2);
 
 
-
     PlayerWindow player_window;
+    pdr::PlayThread p_t ;
+    p_t.start();
     player_window.show();
     MoveToCenter(player_window) ;
     app.exec();
-
-
+    p_t.terminate();
     return 0 ;
 }
