@@ -11,7 +11,7 @@
 #include <boost/date_time.hpp>
 //#include <QMultimedia>
 
-pdr::Controller* pdr::Controller::instance = NULL ;
+pdr::Controller* pdr::Controller::instance_ = NULL ;
 
 pdr::Controller::Controller()
     : IPlay(),
@@ -63,14 +63,14 @@ void pdr::Controller::resetThreads()
 
 pdr::Controller * pdr::Controller::getInstance()
 {
-    if (!instance) instance = new pdr::Controller() ;
-    return instance ;
+    if (!instance_) instance_ = new pdr::Controller() ;
+    return instance_ ;
 }
 
 void pdr::Controller::freeInstance()
 {
-    if (instance) delete instance ;
-    instance = NULL ;
+    if (instance_) delete instance_ ;
+    instance_ = NULL ;
 }
 
 void pdr::Controller::addFrame(Frame *frame)
@@ -108,6 +108,7 @@ void pdr::Controller::play()
             (*it2)->update() ;
         }
 
+
         // wait for all thread
         for (auto it2 = threads_.begin() ; it2 != threads_.end() ; ++it2)
             (*it2)->join();
@@ -128,9 +129,11 @@ void pdr::Controller::play()
     if (p_window_) emit p_window_->playerEndSignal();
 }
 
-void pdr::Controller::pause_continue()
+void pdr::Controller::pause()
 {
 
+    bg_music_player_.pause();
+    /*
     if (state_ == CTRL_PLAY)
     {
         // pause
@@ -145,6 +148,14 @@ void pdr::Controller::pause_continue()
         bg_music_player_.play();
         state_ = CTRL_PLAY ;
     }
+    */
+    state_ = CTRL_PAUSE ;
+}
+
+void pdr::Controller::resume()
+{
+    bg_music_player_.play() ;
+    state_ = CTRL_PLAY ;
 }
 
 void pdr::Controller::stop()

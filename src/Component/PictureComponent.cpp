@@ -60,6 +60,18 @@ void pdr::PictureComponent::play()
     std::this_thread::sleep_for(this->getDuration()) ;
 }
 
+void pdr::PictureComponent::pause()
+{
+    //QTest::qWait(5000) ;
+    // std::this_thread::sleep_for(this->getDuration()) ;
+}
+
+void pdr::PictureComponent::resume()
+{
+    // QTest::qWait(5000) ;
+    // std::this_thread::sleep_for(this->getDuration()) ;
+}
+
 void pdr::PictureComponent::stop()
 {
 }

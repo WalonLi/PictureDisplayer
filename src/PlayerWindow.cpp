@@ -57,11 +57,19 @@ void PlayerWindow::closeBtnClickSlot()
 void PlayerWindow::ppBtnClickSlot()
 {
     qDebug() << "Play ause btn clicked" ;
-    pdr::Controller *controller = pdr::Controller::getInstance();
-    controller->pause_continue();
 
-    bool flag = (controller->getState() == pdr::Controller::CTRL_PAUSE) ? true : false ;
-    graphics_view_->getPlayPauseBtn()->setBtnPixmap(flag);
+    pdr::Controller *controller = pdr::Controller::getInstance();
+
+    if (controller->getState() == pdr::Controller::CTRL_PAUSE)
+    {
+        controller->resume();
+        graphics_view_->getPlayPauseBtn()->setBtnPixmap(true);
+    }
+    else if (controller->getState() == pdr::Controller::CTRL_PLAY)
+    {
+        controller->pause();
+        graphics_view_->getPlayPauseBtn()->setBtnPixmap(false);
+    }
 }
 
 

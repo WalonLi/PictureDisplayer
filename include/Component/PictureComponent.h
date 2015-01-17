@@ -34,6 +34,8 @@ public :
 
     // PictureComponent.cpp implement it.
     void play() ;
+    void pause() ;
+    void resume() ;
     void stop() ;
 
     QImage* getImage() const {return image_ ;}

@@ -59,6 +59,7 @@ void pdr::GraphicsView::hideButton()
         boost::this_thread::sleep_for(boost::chrono::milliseconds(100)) ;
         count++ ;
     }
+    //delete pp_btn_ ;
     pp_btn_->hide(); ;
     close_btn_->hide();
 }

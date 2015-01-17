@@ -65,7 +65,8 @@ public:
     state getState() const { return state_; }
 
     void play() ;
-    void pause_continue() ;
+    void pause() ;
+    void resume() ;
     void stop() ;
     void forward(){}
     void backward(){}
@@ -94,7 +95,7 @@ private:
     PlayerWindow *p_window_ ;
 
     // controller instance
-    static pdr::Controller *instance ;
+    static pdr::Controller *instance_ ;
 };
 }
 

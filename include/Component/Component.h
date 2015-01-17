@@ -28,7 +28,8 @@ public :
     std::chrono::milliseconds & getDuration() {return duration_ ;}
 
     virtual void play(){}
-    virtual void pause_continue(){}
+    virtual void pause(){}
+    virtual void resume(){}
     virtual void stop(){}
     virtual void forward(){}
     virtual void backward(){}
