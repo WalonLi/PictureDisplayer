@@ -9,9 +9,12 @@
 #include "include/Controller.h"
 #include "include/PlayThread.h"
 #include "include/Component/PictureComponent.h"
+#include "include/Component/TextComponent.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
+#include <QFont>
+#include <QTextItem>
 #include <boost/chrono.hpp>
 
 void MoveToCenter(QMainWindow& w)
@@ -48,9 +51,20 @@ int main(int argc, char *argv[])
     pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
     frame1->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
                                                   pdr::PictureComponent::IgnoreAspecRatio));
+    QFont f ;
+    f.setBold(true);
+    f.setPixelSize(30);
+    frame1->addComponent(new pdr::TextComponent(
+                             new pdr::TextItem("Hello",QColor(0,0xff,0,0xff),f)));
+    //frame1->addComponent(new pdr::TextComponent(
+    //                         new pdr::TextItem("Hello")));
+    //frame1->addComponent(new pdr::TextComponent(
+    //                         new pdr::TextItem("Hello",QColor(0,0xff,0,0xff),f),
+    //                         QPointF(50,50)));
 
     pdr::Frame *frame2 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
     frame2->addComponent(new pdr::PictureComponent(new QImage("image/walon2.jpg")));
+
 
     controller->addFrame(frame1);
     controller->addFrame(frame2);

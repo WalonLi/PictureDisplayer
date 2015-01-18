@@ -39,8 +39,8 @@ public :
     void resume() ;
     void stop() ;
 
-    QImage* getImage() const {return image_ ;}
-    Effective* getEffective() const {return effect_ ;}
+    const QImage* getImage() const {return image_ ;}
+    const Effective* getEffective() const {return effect_ ;}
 
 
     // override QGraphicsItem function

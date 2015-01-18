@@ -17,17 +17,23 @@ public:
     explicit Frame(boost::chrono::milliseconds d) ;
     ~Frame() ;
 
-    void addComponent(Component *c){ components_.push_back(c); }
+    void addComponent(Component *c)
+        { components_.push_back(c); }
+
     void addComponent(std::vector<Component*> & c)
-    {
-        components_.insert(components_.end(), c.begin(), c.end());
-    }
+        {components_.insert(components_.end(), c.begin(), c.end());}
 
-    size_t getComponentsCount () const { return components_.size() ;}
-    std::vector<Component*> & getComponents() {return components_;}
-    Component* getComponent(int i) const { return components_[i] ;}
+    size_t getComponentsCount () const
+        { return components_.size() ;}
 
-    boost::chrono::milliseconds getDuration() const {return duration_;}
+    std::vector<Component*> & getComponents()
+        {return components_;}
+
+    Component* getComponent(const int i) const
+        { return components_[i] ;}
+
+    const boost::chrono::milliseconds getDuration() const
+        {return duration_;}
 
 private:
     std::vector<Component*> components_ ;

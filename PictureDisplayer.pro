@@ -45,7 +45,8 @@ SOURCES +=  \
     src/PlayerLayout/PlayPauseBtn.cpp \
     src/PlayerLayout/GraphicsView.cpp \
     src/PlayerLayout/CloseBtn.cpp \
-    src/Frame.cpp
+    src/Frame.cpp \
+    src/Component/TextComponent.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \

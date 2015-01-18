@@ -22,10 +22,10 @@ public :
     explicit Component(QObject *w) : IPlay(), QGraphicsItem(NULL), base_obj_(w), duration_(0){}
     virtual ~Component(){}
 
-    QObject* getBaseObj() const { return base_obj_ ; }
+    const QObject* getBaseObj() const { return base_obj_ ; }
 
-    void setDuration(boost::chrono::milliseconds d){ duration_ = d;}
-    boost::chrono::milliseconds & getDuration() {return duration_ ;}
+    void setDuration(const boost::chrono::milliseconds &d){ duration_ = d;}
+    const boost::chrono::milliseconds & getDuration() const {return duration_ ;}
 
     virtual void play(){}
     virtual void pause(){}
