@@ -26,8 +26,10 @@ public :
     void paintEvent(QPaintEvent*) ;
     QSize sizeHint() const ;
 
+    void timerEvent(QTimerEvent *e) ;
 private :
     QPixmap pixmap_ ;
+    qreal progress_ ;
     // QIcon icon_ ;
 } ;
 }

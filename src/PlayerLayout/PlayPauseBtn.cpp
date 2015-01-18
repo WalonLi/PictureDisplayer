@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QPainter>
+#include <QTimerEvent>
 #include "include/PlayerLayout/PlayPauseBtn.h"
 
 
@@ -13,13 +14,14 @@ pdr::PlayPauseBtn::PlayPauseBtn(QWidget *parent):
     QAbstractButton(parent),
     pixmap_("image/pause.png"),
     play_pixmap_("image/play.png"),
-    pause_pixmap_("image/pause.png")
+    pause_pixmap_("image/pause.png"),
+    progress_(0)
     // icon_(pixmap_)
 {
     //icon_.addPixmap(pixmap_);
     //this->setIcon(icon_);
     //this->setIconSize(QSize(64,64));
-    this->setGeometry(736,536,800,600) ;
+    //this->setGeometry(736,536,800,600) ;
     //this->setMask(pixmap_.mask()) ;
 
     // we need change pixmap and notify controller to stop
@@ -34,7 +36,19 @@ pdr::PlayPauseBtn::PlayPauseBtn(QWidget *parent):
                   SIGNAL(clicked()),
                   parent->parentWidget()->parentWidget(),
                   SLOT(ppBtnClickSlot())) ;
+    this->hide();
+    this->startTimer(50) ;
+}
 
+void pdr::PlayPauseBtn::timerEvent(QTimerEvent *e)
+{
+    if (!progress_) this->show();
+
+    this->move(736, 600-(progress_*16));
+    progress_++ ;
+
+    if (progress_ >= 5)
+        this->killTimer(e->timerId());
 }
 
 void pdr::PlayPauseBtn::setBtnPixmap(bool flag)

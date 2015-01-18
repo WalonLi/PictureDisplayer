@@ -29,10 +29,13 @@ public :
 
     void setBtnPixmap(bool flag) ;
 
+    void timerEvent(QTimerEvent *e) ;
+
 private :
     QPixmap pixmap_ ;
     QPixmap play_pixmap_ ;
     QPixmap pause_pixmap_ ;
+    qreal progress_ ;
     // QIcon icon_ ;
 } ;
 }

@@ -77,8 +77,8 @@ void pdr::GraphicsView::timerEvent(QTimerEvent*)
         {
             pp_btn_ = new PlayPauseBtn(this) ;
             close_btn_ = new CloseBtn(this) ;
-            pp_btn_->show();
-            close_btn_->show();
+            //pp_btn_->show();
+            //close_btn_->show();
             this->scene()->update();
         }
 
