@@ -3,7 +3,6 @@
 1. Transparent player window and button(Limitation now, please see 1/2 history)
 2. Finish Spinner bar(Selector->Player animation)
 3. Parser and FileSelector
-4. How to integrate effective into Picture Component instead of write new component.
 4. Run fail with QT5.4
 5. [Critical] Sometimes, program will crash when click close button, but it very hard to duplicate issue. 
 
@@ -21,6 +20,7 @@
 2. Understand how to do a animation(see PictureComponent.cpp)
 3. Finish button's animation
 4. Finish TextComponent.h/cpp
+5. Integrate Effective obj into component, and finish LinearMoveEffect animation.
 
 ## 15/01/15
 1. We don't have good idea with Pause/Continue feature now.  
