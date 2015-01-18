@@ -29,7 +29,10 @@ public :
     };
 
 
-    explicit PictureComponent(QImage *i, Scale s = Scale::None, Effective *e = NULL) ;
+    explicit PictureComponent(QImage *i,
+                              Scale s = Scale::None,
+                              QPointF p = QPointF(),
+                              Effective *e = NULL) ;
     virtual ~PictureComponent() ;
 
 
@@ -54,6 +57,7 @@ protected:
 private :
     QImage *image_ ;
     Scale scale_;
+    QPointF pos_ ;
     pdr::Effective *effect_ ;
 } ;
 }

@@ -16,13 +16,6 @@ pdr::CloseBtn::CloseBtn(QWidget *parent):
     progress_(0)
     //icon_(pixmap_)
 {
-    //icon_.addPixmap(pixmap_);
-    //this->setIcon(icon_);
-    // this->setIconSize(QSize(64,64));
-    // this->setGeometry(736,0,800,64) ;
-
-    //this->setMask(pixmap_.mask()) ;
-
     // connect to play_window widget
     this->connect(this,
                   SIGNAL(clicked()),

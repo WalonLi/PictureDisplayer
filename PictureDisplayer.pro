@@ -47,7 +47,8 @@ SOURCES +=  \
     src/PlayerLayout/CloseBtn.cpp \
     src/Frame.cpp \
     src/Component/TextComponent.cpp \
-    src/Component/SoundComponent.cpp
+    src/Component/SoundComponent.cpp \
+    src/Effective/LinearMoveEffect.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -64,7 +65,8 @@ HEADERS +=  \
     include/PlayerLayout/GraphicsView.h \
     include/PlayerLayout/CloseBtn.h \
     include/PlayThread.h \
-    include/Component/SoundComponent.h
+    include/Component/SoundComponent.h \
+    include/Effective/LinearMoveEffect.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

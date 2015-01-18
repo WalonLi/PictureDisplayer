@@ -5,6 +5,7 @@
 **/
 
 #include "include/Component/TextComponent.h"
+#include "include/Effective/LinearMoveEffect.h"
 #include <QDebug>
 #include <boost/thread.hpp>
 #include <QThread>
@@ -18,7 +19,7 @@ pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
 {
     if (pos_.isNull())
     {
-        // not to assign poistion, put it to middle-down.
+        // if not to assign poistion, put it to middle-down.
         QFontMetrics metric(item_->getFont()) ;
 
         qreal x = 0;
@@ -28,6 +29,12 @@ pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
             x += metric.width(*it) ;
 
         pos_ = QPointF((800-x)/2, 600-y-30) ;
+    }
+
+    if (effect_)
+    {
+        if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
+            this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
     }
 }
 
@@ -39,14 +46,17 @@ pdr::TextComponent::~TextComponent()
 
 void pdr::TextComponent::timerEvent(QTimerEvent* e)
 {
-    // qDebug() << "timerEvent" ;
     if (pause_flag_)
     {
         this->killTimer(e->timerId());
     }
+    else
+    {
+        if (effect_)
+            effect_->play(this);
+    }
 }
 
-// void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::TextComponent::paint(QPainter *painter,
                                const QStyleOptionGraphicsItem *,
                                QWidget *)
@@ -65,25 +75,22 @@ QRectF pdr::TextComponent::boundingRect() const
 
 void pdr::TextComponent::play()
 {
-    this->startTimer(100) ;
+    this->startTimer(50) ;
 }
 
 void pdr::TextComponent::pause()
 {
-    // qDebug() << "Picture pasue" ;
     pause_flag_ = true ;
 }
 
 void pdr::TextComponent::resume()
 {
-    // qDebug() << "Picture resume" ;
     pause_flag_ = false ;
-    this->startTimer(100) ;
+    this->startTimer(50) ;
 }
 
 void pdr::TextComponent::stop()
 {
-    // this->thread()->exit();
 }
 
 

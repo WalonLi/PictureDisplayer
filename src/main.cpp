@@ -11,10 +11,12 @@
 #include "include/Component/PictureComponent.h"
 #include "include/Component/TextComponent.h"
 #include "include/Component/SoundComponent.h"
+#include "include/Effective/LinearMoveEffect.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
 #include <QFont>
+#include <QPointF>
 #include <QTextItem>
 #include <boost/chrono.hpp>
 
@@ -52,15 +54,27 @@ int main(int argc, char *argv[])
     pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
 
     // Image demo
-    frame1->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
-                                                  pdr::PictureComponent::IgnoreAspecRatio));
+    frame1->addComponent(new pdr::PictureComponent(
+                             new QImage("image/walon.jpg"),
+                             pdr::PictureComponent::IgnoreAspecRatio,
+                             QPointF(),
+                             new pdr::LinearMoveEffect(
+                                 QPointF(800,0),
+                                 QPointF(-800,0),
+                                 boost::chrono::milliseconds(5000))));
+
 
     // Text demo
     QFont f ;
     f.setBold(true);
     f.setPixelSize(30);
     frame1->addComponent(new pdr::TextComponent(
-                             new pdr::TextItem("Hello",QColor(0,0xff,0,0xff),f)));
+                             new pdr::TextItem("Hello",QColor(0,0xff,0,0xff),f),
+                             QPointF(),
+                             new pdr::LinearMoveEffect(
+                                 QPointF(800,0),
+                                 QPointF(-800,0),
+                                 boost::chrono::milliseconds(5000))));
     //frame1->addComponent(new pdr::TextComponent(
     //                         new pdr::TextItem("Hello")));
     //frame1->addComponent(new pdr::TextComponent(
