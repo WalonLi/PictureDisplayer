@@ -10,6 +10,7 @@
 #include "include/PlayThread.h"
 #include "include/Component/PictureComponent.h"
 #include "include/Component/TextComponent.h"
+#include "include/Component/SoundComponent.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
@@ -46,11 +47,15 @@ int main(int argc, char *argv[])
     */
 
     // below code to make a parser
-    controller->setBGMusic(QDir::currentPath().toStdString() + "/music/bg_music.mp3");
+    controller->setBGMusic("music/bg_music.mp3");
 
     pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
+
+    // Image demo
     frame1->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
                                                   pdr::PictureComponent::IgnoreAspecRatio));
+
+    // Text demo
     QFont f ;
     f.setBold(true);
     f.setPixelSize(30);
@@ -61,6 +66,12 @@ int main(int argc, char *argv[])
     //frame1->addComponent(new pdr::TextComponent(
     //                         new pdr::TextItem("Hello",QColor(0,0xff,0,0xff),f),
     //                         QPointF(50,50)));
+
+    // sound demo
+    //frame1->addComponent(new pdr::SoundComponent("music/oldcarhorn.wav"));
+    frame1->addComponent(new pdr::SoundComponent("music/oldcarhorn.wav",
+                                                 boost::chrono::milliseconds(2000)));
+
 
     pdr::Frame *frame2 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
     frame2->addComponent(new pdr::PictureComponent(new QImage("image/walon2.jpg")));

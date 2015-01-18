@@ -14,6 +14,7 @@
 #include <QThread>
 #include <QMediaPlayer>
 #include <QDir>
+#include <boost/format.hpp>
 #include "Frame.h"
 #include "IPlay.h"
 #include "PlayerWindow.h"
@@ -51,7 +52,12 @@ public:
     }
 
     void setBGMusic(const std::string &s)
-        {bg_music_player_.setMedia(QMediaContent(QUrl::fromLocalFile(s.c_str())));}
+    {
+        std::string path = (boost::format("%s/%s")
+                            % QDir::currentPath().toStdString()
+                            % s).str() ;
+        bg_music_player_.setMedia(QMediaContent(QUrl::fromLocalFile(path.c_str())));
+    }
 
     void setBGMusic(const QMediaContent &media)
         {bg_music_player_.setMedia(media);}

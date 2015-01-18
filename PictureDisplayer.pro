@@ -46,7 +46,8 @@ SOURCES +=  \
     src/PlayerLayout/GraphicsView.cpp \
     src/PlayerLayout/CloseBtn.cpp \
     src/Frame.cpp \
-    src/Component/TextComponent.cpp
+    src/Component/TextComponent.cpp \
+    src/Component/SoundComponent.cpp
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -62,7 +63,8 @@ HEADERS +=  \
     include/PlayerLayout/PlayPauseBtn.h \
     include/PlayerLayout/GraphicsView.h \
     include/PlayerLayout/CloseBtn.h \
-    include/PlayThread.h
+    include/PlayThread.h \
+    include/Component/SoundComponent.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui
