@@ -1,11 +1,11 @@
 /**
     Provide by Walon Li, YJ Fang
 
-    File PictureComponent.h
+    File CycleBtn.h
 **/
 
-#ifndef CLOSE_BTN_H
-#define CLOSE_BTN_H
+#ifndef CYCLE_BTN_H
+#define CYCLE_BTN_H
 
 #include <QImage>
 #include <QPainter>
@@ -15,12 +15,12 @@
 
 namespace pdr
 {
-class CloseBtn : public QAbstractButton
+class CycleBtn : public QAbstractButton
 {
 
 public :
-    explicit CloseBtn(QWidget *parent=0);
-    virtual ~CloseBtn(){}
+    explicit CycleBtn(QWidget *parent=0);
+    virtual ~CycleBtn(){}
 
     void paintEvent(QPaintEvent*) ;
     QSize sizeHint() const ;

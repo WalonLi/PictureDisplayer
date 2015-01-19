@@ -1,11 +1,11 @@
 /**
     Provide by Walon Li, YJ Fang
 
-    File PictureComponent.h
+    File LoadFileBtn.h
 **/
 
-#ifndef CLOSE_BTN_H
-#define CLOSE_BTN_H
+#ifndef LOAD_FILE_BTN_H
+#define LOAD_FILE_BTN_H
 
 #include <QImage>
 #include <QPainter>
@@ -15,12 +15,12 @@
 
 namespace pdr
 {
-class CloseBtn : public QAbstractButton
+class LoadFileBtn : public QAbstractButton
 {
 
 public :
-    explicit CloseBtn(QWidget *parent=0);
-    virtual ~CloseBtn(){}
+    explicit LoadFileBtn(QWidget *parent=0);
+    virtual ~LoadFileBtn(){}
 
     void paintEvent(QPaintEvent*) ;
     QSize sizeHint() const ;

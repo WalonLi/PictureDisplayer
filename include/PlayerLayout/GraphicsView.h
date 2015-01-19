@@ -14,6 +14,8 @@
 #include <boost/thread.hpp>
 #include "PlayPauseBtn.h"
 #include "CloseBtn.h"
+#include "CycleBtn.h"
+#include "LoadFileBtn.h"
 
 namespace pdr
 {
@@ -38,8 +40,10 @@ protected:
 
 private :
     QGraphicsScene *scene_ ;
-    PlayPauseBtn *pp_btn_;
     CloseBtn *close_btn_;
+    LoadFileBtn *load_file_btn_;
+    CycleBtn *cycle_btn_;
+    PlayPauseBtn *pp_btn_;
     boost::thread *hide_btn_thread_ ;
 } ;
 }

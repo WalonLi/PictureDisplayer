@@ -88,5 +88,7 @@ int main(int argc, char *argv[])
     MoveToCenter(player_window) ;
     app.exec();
     p_t.terminate();
+    p_t.wait() ;
+    qDebug() << "Thread is good??" ;
     return 0 ;
 }

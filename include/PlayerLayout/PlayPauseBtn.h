@@ -11,7 +11,6 @@
 #include <QPainter>
 #include <QRectF>
 #include <QBitmap>
-#include <QIcon>
 #include <QAbstractButton>
 
 namespace pdr

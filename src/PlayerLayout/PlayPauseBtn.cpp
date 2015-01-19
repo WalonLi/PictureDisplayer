@@ -44,10 +44,10 @@ void pdr::PlayPauseBtn::timerEvent(QTimerEvent *e)
 {
     if (!progress_) this->show();
 
-    this->move(736, 600-(progress_*16));
+    this->move(896-(progress_*16), 530);
     progress_++ ;
 
-    if (progress_ >= 5)
+    if (progress_ >= 11)
         this->killTimer(e->timerId());
 }
 
