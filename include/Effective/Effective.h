@@ -9,6 +9,7 @@
 
 #include <QDebug>
 #include <QGraphicsItem>
+#include <QPointF>
 
 namespace pdr
 {
@@ -19,8 +20,9 @@ public :
     virtual ~Effective(){}
 
     virtual void play(QGraphicsItem*) = 0 ;
+    virtual void prepare(QGraphicsItem*) = 0 ;
 protected :
-    int progress_ ;
+    int progress_;
 } ;
 }
 #endif

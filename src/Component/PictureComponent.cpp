@@ -43,9 +43,10 @@ pdr::PictureComponent::PictureComponent(QImage *i, Scale s, QPointF p, Effective
 
     if (effect_)
     {
+        effect_->prepare(this);
         // set effect
-        if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
-            this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
+        //if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
+        //    this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
     }
 }
 

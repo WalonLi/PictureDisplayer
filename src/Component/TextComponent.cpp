@@ -33,8 +33,9 @@ pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
 
     if (effect_)
     {
-        if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
-            this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
+        effect_->prepare(this);
+        //if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
+        //    this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
     }
 }
 
