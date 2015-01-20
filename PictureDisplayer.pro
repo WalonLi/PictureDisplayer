@@ -24,9 +24,9 @@ win32-g++* {
     INCLUDEPATH += G:/boost_1_56_0
     LIBS += G:/boost_1_56_0/stage/lib/libboost_filesystem-$${COMPILER}-mt-$${Boost_VERSION}.a \
             G:/boost_1_56_0/stage/lib/libboost_system-$${COMPILER}-mt-$${Boost_VERSION}.a \
+            G:/boost_1_56_0/stage/lib/libboost_thread-$${COMPILER}-mt-$${Boost_VERSION}.a \
+            G:/boost_1_56_0/stage/lib/libboost_chrono-$${COMPILER}-mt-$${Boost_VERSION}.a \
             -lws2_32
-    PRE_TARGETDEPS += G:/boost_1_56_0/stage/lib/libboost_filesystem-$${COMPILER}-mt-$${Boost_VERSION}.a \
-                      G:/boost_1_56_0/stage/lib/libboost_system-$${COMPILER}-mt-$${Boost_VERSION}.a
     QMAKE_CXXFLAGS += -mwindows
     QMAKE_LFLAGS += $$QMAKE_LFLAGS_WINDOWS
     QMAKE_LFLAGS_CONSOLE =

@@ -50,7 +50,7 @@ pdr::GraphicsView::~GraphicsView()
 
 void pdr::GraphicsView::hideButton()
 {
-    volatile static u_int count ;
+    volatile static int count ;
     count = 0 ;
 
     while (count < 30)

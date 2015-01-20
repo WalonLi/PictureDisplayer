@@ -76,7 +76,6 @@ int main(int argc, char *argv[])
     pdr::Frame *frame2 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
     frame2->addComponent(new pdr::PictureComponent(new QImage("image/walon2.jpg")));
 
-
     controller->addFrame(frame1);
     controller->addFrame(frame2);
 
