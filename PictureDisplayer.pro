@@ -48,13 +48,11 @@ SOURCES +=  \
     src/Frame.cpp \
     src/Component/TextComponent.cpp \
     src/Component/SoundComponent.cpp \
-<<<<<<< HEAD
     src/PlayerLayout/CycleBtn.cpp \
-    src/PlayerLayout/LoadFileBtn.cpp
-=======
+    src/PlayerLayout/LoadFileBtn.cpp \
     src/Effective/LinearMoveEffect.cpp \
     src/Effective/RectScrewInOutEffect.cpp
->>>>>>> Effective
+
 
 HEADERS +=  \
     include/SelectorWindow.h \
@@ -72,13 +70,10 @@ HEADERS +=  \
     include/PlayerLayout/CloseBtn.h \
     include/PlayThread.h \
     include/Component/SoundComponent.h \
-<<<<<<< HEAD
     include/PlayerLayout/CycleBtn.h \
-    include/PlayerLayout/LoadFileBtn.h
-=======
+    include/PlayerLayout/LoadFileBtn.h \
     include/Effective/LinearMoveEffect.h \
     include/Effective/RectScrewInOutEffect.h
->>>>>>> Effective
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui
