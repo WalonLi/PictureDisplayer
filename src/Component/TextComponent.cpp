@@ -5,6 +5,7 @@
 **/
 
 #include "include/Component/TextComponent.h"
+#include "include/Effective/LinearMoveEffect.h"
 #include <QDebug>
 #include <boost/thread.hpp>
 #include <QThread>
@@ -13,12 +14,13 @@
 pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
     Component(NULL),
     item_(t),
+    rect_(),
     pos_(p),
     effect_(e)
 {
     if (pos_.isNull())
     {
-        // not to assign poistion, put it to middle-down.
+        // if not to assign poistion, put it to middle-down.
         QFontMetrics metric(item_->getFont()) ;
 
         qreal x = 0;
@@ -27,7 +29,13 @@ pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
         for (auto it = str.begin() ; it != str.end() ; ++it)
             x += metric.width(*it) ;
 
+        rect_ = QRectF(0,0,x,y) ;
         pos_ = QPointF((800-x)/2, 600-y-30) ;
+    }
+
+    if (effect_)
+    {
+        effect_->prepare(this);
     }
 }
 
@@ -39,14 +47,19 @@ pdr::TextComponent::~TextComponent()
 
 void pdr::TextComponent::timerEvent(QTimerEvent* e)
 {
-    // qDebug() << "timerEvent" ;
+
     if (pause_flag_)
     {
         this->killTimer(e->timerId());
     }
+    else
+    {
+        if (effect_)
+            effect_->play(this, NULL);
+    }
+
 }
 
-// void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::TextComponent::paint(QPainter *painter,
                                const QStyleOptionGraphicsItem *,
                                QWidget *)
@@ -55,35 +68,39 @@ void pdr::TextComponent::paint(QPainter *painter,
     pen.setColor(item_->getColor());
     painter->setPen(pen);
     painter->setFont(item_->getFont());
-    painter->drawText(pos_, item_->getString().c_str());
+    /*
+    if (effect_)
+        effect_->play(this, painter);
+    else*/
+        painter->drawText(pos_, item_->getString().c_str());
+
+    //if (effect_)
+    //
 }
 
 QRectF pdr::TextComponent::boundingRect() const
 {
-    return QRectF(0,0,800,600) ;
+    return rect_ ;
 }
 
 void pdr::TextComponent::play()
 {
-    this->startTimer(100) ;
+    this->startTimer(50) ;
 }
 
 void pdr::TextComponent::pause()
 {
-    // qDebug() << "Picture pasue" ;
     pause_flag_ = true ;
 }
 
 void pdr::TextComponent::resume()
 {
-    // qDebug() << "Picture resume" ;
     pause_flag_ = false ;
-    this->startTimer(100) ;
+    this->startTimer(50) ;
 }
 
 void pdr::TextComponent::stop()
 {
-    // this->thread()->exit();
 }
 
 

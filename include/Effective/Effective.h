@@ -7,24 +7,25 @@
 #ifndef EFFECTIVE_H
 #define EFFECTIVE_H
 
-#include <QWidget>
 #include <QDebug>
+#include <QGraphicsItem>
+#include <QPointF>
+#include <QPainter>
 
 namespace pdr
 {
 class Effective
 {
 public :
-    explicit Effective(QWidget *w) : base_widget(w){}
+    explicit Effective() : progress_(0) {}
     virtual ~Effective(){}
 
-    QWidget* getBaseWidget() { return base_widget ; }
-
-    virtual void pre() = 0 ;
-    virtual void mid() = 0 ;
-    virtual void post() = 0 ;
-private :
-    QWidget *base_widget ;
+    virtual void play(QGraphicsItem*, QPainter*) = 0 ;
+    virtual void play(QGraphicsItem*, QPainter*, QImage&) = 0 ;
+    virtual void play(QGraphicsItem*, QPainter*, QString&) = 0 ;
+    virtual void prepare(QGraphicsItem*) = 0 ;
+protected :
+    int progress_;
 } ;
 }
 #endif

@@ -5,20 +5,23 @@
 **/
 
 #include "include/Component/PictureComponent.h"
+#include "include/Effective/LinearMoveEffect.h"
 #include <QDebug>
 #include <QStyleOptionGraphicsItem>
 #include <boost/thread.hpp>
 #include <QThread>
 
 
-pdr::PictureComponent::PictureComponent(QImage *i, Scale s, Effective *e):
+pdr::PictureComponent::PictureComponent(QImage *i, QPointF p, Effective *e):
     Component(NULL),
     image_(i),
-    scale_(s),
+    pos_(p),
     effect_(e)
 {
+    /*
     switch (scale_)
     {
+        // scale image
         case Scale::IgnoreAspecRatio:
         {
             QImage *temp = image_ ;
@@ -28,6 +31,22 @@ pdr::PictureComponent::PictureComponent(QImage *i, Scale s, Effective *e):
         }
         default:
             break ;
+    }
+    */
+    if (pos_.isNull())
+    {
+        // put it to center
+        qreal width = (image_->width() > 800) ? 800 : image_->width() ;
+        qreal height = (image_->height() > 600) ? 600 : image_->height() ;
+        pos_ = QPointF((800-width)/2, (600-height)/2) ;
+    }
+
+    if (effect_)
+    {
+        effect_->prepare(this);
+        // set effect
+        //if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
+        //    this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
     }
 }
 
@@ -40,65 +59,55 @@ pdr::PictureComponent::~PictureComponent()
 
 void pdr::PictureComponent::timerEvent(QTimerEvent* e)
 {
-    // qDebug() << "timerEvent" ;
-    // static int count = 0 ;
+
     if (pause_flag_)
     {
         this->killTimer(e->timerId());
     }
     else
     {
-        /*
-        // draw animation
-        count++ ;
-        if (count == 1)
-            this->moveBy(10,10);
-        else if (count == 2)
-            this->moveBy(10,10);
-        else if (count == 3)
-            this->moveBy(-10,-10);
-        else if (count == 4)
-            this->moveBy(-10,-10);
-        */
+        if (effect_)
+            effect_->play(this, NULL);
     }
+
 }
 
-// void pdr::PictureComponent::paintEvent(QPaintEvent *event)
 void pdr::PictureComponent::paint(QPainter *painter,
                                   const QStyleOptionGraphicsItem *,
                                   QWidget *)
 {
-    qreal width = (image_->width() > 800) ? 800 : image_->width() ;
-    qreal height = (image_->height() > 600) ? 600 : image_->height() ;
-    painter->drawImage((800-width)/2, (600-height)/2, *image_);
+    /*
+    if (effect_)
+        effect_->play(this, painter, *image_);
+    else
+    */
+        painter->drawImage(pos_, *image_);
 }
 
 QRectF pdr::PictureComponent::boundingRect() const
 {
-    return QRectF(0,0,800,600) ;
+
+    return QRectF(0, 0, image_->width(), image_->height()) ;
 }
 
 void pdr::PictureComponent::play()
 {
-    this->startTimer(100) ;
+    this->startTimer(50) ;
 }
 
 void pdr::PictureComponent::pause()
 {
-    // qDebug() << "Picture pasue" ;
     pause_flag_ = true ;
 }
 
 void pdr::PictureComponent::resume()
 {
-    // qDebug() << "Picture resume" ;
     pause_flag_ = false ;
-    this->startTimer(100) ;
+    this->startTimer(50) ;
 }
 
 void pdr::PictureComponent::stop()
 {
-    // this->thread()->exit();
 }
 
 
