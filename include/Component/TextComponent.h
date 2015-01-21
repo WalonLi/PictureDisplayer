@@ -70,6 +70,7 @@ protected:
 
 private :
     pdr::TextItem *item_ ;
+    QRectF rect_ ;
     QPointF pos_ ;
     pdr::Effective *effect_ ;
 } ;

@@ -28,7 +28,28 @@ void pdr::LinearMoveEffect::prepare(QGraphicsItem *item)
     item->moveBy(start_pos_.x(), start_pos_.y());
 }
 
-void pdr::LinearMoveEffect::play(QGraphicsItem *item)
+void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter)
+{
+
+    if (progress_)
+    {
+        item->moveBy(move_pos_.x(), move_pos_.y());
+        progress_-- ;
+    }
+}
+
+void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter, QImage &image)
+{
+
+    if (progress_)
+    {
+        painter->drawImage(0,0,image);
+        //item->moveBy(move_pos_.x(), move_pos_.y());
+        progress_-- ;
+    }
+}
+
+void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter, QString &str)
 {
 
     if (progress_)

@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QGraphicsItem>
 #include <QPointF>
+#include <QPainter>
 
 namespace pdr
 {
@@ -19,7 +20,9 @@ public :
     explicit Effective() : progress_(0) {}
     virtual ~Effective(){}
 
-    virtual void play(QGraphicsItem*) = 0 ;
+    virtual void play(QGraphicsItem*, QPainter*) = 0 ;
+    virtual void play(QGraphicsItem*, QPainter*, QImage&) = 0 ;
+    virtual void play(QGraphicsItem*, QPainter*, QString&) = 0 ;
     virtual void prepare(QGraphicsItem*) = 0 ;
 protected :
     int progress_;

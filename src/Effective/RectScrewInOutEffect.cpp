@@ -5,7 +5,7 @@
 **/
 
 #include "include/Effective/RectScrewInOutEffect.h"
-
+#include <QPainter>
 
 pdr::RectScrewInOutEffect::RectScrewInOutEffect(boost::chrono::milliseconds m):
     Effective(),
@@ -27,14 +27,29 @@ pdr::RectScrewInOutEffect::~RectScrewInOutEffect()
 
 void pdr::RectScrewInOutEffect::prepare(QGraphicsItem *item)
 {
-
+    //item->moveBy(800,0);
+    //item->matrix().rotate(5) ;
+    qDebug() <<item->mapRectToScene(item->boundingRect()) ;
+    qDebug() << item->boundingRect() ;
+    //item->
 }
 
-void pdr::RectScrewInOutEffect::play(QGraphicsItem *item)
+void pdr::RectScrewInOutEffect::play(QGraphicsItem *item, QPainter *p)
 {
-    if (progress_)
-    {
-        item->moveBy(move_pos_.x(), move_pos_.y());
-        progress_-- ;
-    }
+    //p->draw
+    //item->moveBy(-10, 0);
+    static int c = 0 ;
+    //p->drawImage(0, 50+c, i);
+    c+=10 ;
+    //p = new QPainter(item->se) ;
+}
+
+void pdr::RectScrewInOutEffect::play(QGraphicsItem *item, QPainter *p, QImage & i)
+{
+    //p->draw
+    //item->moveBy(-10, 0);
+    static int c = 0 ;
+    p->drawImage(0, 50+c, i);
+    c+=10 ;
+    //p = new QPainter(item->se) ;
 }

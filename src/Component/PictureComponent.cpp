@@ -12,13 +12,13 @@
 #include <QThread>
 
 
-pdr::PictureComponent::PictureComponent(QImage *i, Scale s, QPointF p, Effective *e):
+pdr::PictureComponent::PictureComponent(QImage *i, QPointF p, Effective *e):
     Component(NULL),
     image_(i),
-    scale_(s),
     pos_(p),
     effect_(e)
 {
+    /*
     switch (scale_)
     {
         // scale image
@@ -32,7 +32,7 @@ pdr::PictureComponent::PictureComponent(QImage *i, Scale s, QPointF p, Effective
         default:
             break ;
     }
-
+    */
     if (pos_.isNull())
     {
         // put it to center
@@ -59,6 +59,7 @@ pdr::PictureComponent::~PictureComponent()
 
 void pdr::PictureComponent::timerEvent(QTimerEvent* e)
 {
+
     if (pause_flag_)
     {
         this->killTimer(e->timerId());
@@ -66,20 +67,27 @@ void pdr::PictureComponent::timerEvent(QTimerEvent* e)
     else
     {
         if (effect_)
-            effect_->play(this);
+            effect_->play(this, NULL);
     }
+
 }
 
 void pdr::PictureComponent::paint(QPainter *painter,
                                   const QStyleOptionGraphicsItem *,
                                   QWidget *)
 {
-    painter->drawImage(pos_, *image_);
+    /*
+    if (effect_)
+        effect_->play(this, painter, *image_);
+    else
+    */
+        painter->drawImage(pos_, *image_);
 }
 
 QRectF pdr::PictureComponent::boundingRect() const
 {
-    return QRectF(0,0,800,600) ;
+
+    return QRectF(0, 0, image_->width(), image_->height()) ;
 }
 
 void pdr::PictureComponent::play()

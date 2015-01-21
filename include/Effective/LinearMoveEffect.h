@@ -20,7 +20,9 @@ public:
     explicit LinearMoveEffect(QPointF p1, QPointF p2, milliseconds m = milliseconds(1000)) ;
     virtual ~LinearMoveEffect() ;
 
-    void play(QGraphicsItem*item) ;
+    void play(QGraphicsItem*, QPainter*);
+    void play(QGraphicsItem*, QPainter*, QImage&);
+    void play(QGraphicsItem*, QPainter*, QString&);
     void prepare(QGraphicsItem*item);
 
     //const QPointF & getStartPos() const {return start_pos_;}

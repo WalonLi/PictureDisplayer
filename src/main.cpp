@@ -12,6 +12,7 @@
 #include "include/Component/TextComponent.h"
 #include "include/Component/SoundComponent.h"
 #include "include/Effective/LinearMoveEffect.h"
+#include "include/Effective/RectScrewInOutEffect.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
@@ -50,13 +51,12 @@ int main(int argc, char *argv[])
 
     // below code to make a parser
     controller->setBGMusic("music/bg_music.mp3");
-#if 0
+#if 1
     pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
 
     // Image demo
     frame1->addComponent(new pdr::PictureComponent(
                              new QImage("image/walon.jpg"),
-                             pdr::PictureComponent::IgnoreAspecRatio,
                              QPointF(),
                              new pdr::LinearMoveEffect(
                                  QPointF(800,0),
@@ -89,13 +89,17 @@ int main(int argc, char *argv[])
 
     pdr::Frame *frame2 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
     frame2->addComponent(new pdr::PictureComponent(new QImage("image/walon2.jpg")));
-#endif
-    pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
-    frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon3.jpg")));
-
 
     controller->addFrame(frame1);
     controller->addFrame(frame2);
+#endif
+
+    pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
+    frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon3.jpg"),
+                                                   QPointF(),
+                                                   new pdr::RectScrewInOutEffect(
+                                                       boost::chrono::milliseconds(5000))));
+
     controller->addFrame(frame3);
 
     PlayerWindow player_window;

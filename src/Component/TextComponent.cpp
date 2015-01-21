@@ -14,6 +14,7 @@
 pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
     Component(NULL),
     item_(t),
+    rect_(),
     pos_(p),
     effect_(e)
 {
@@ -28,14 +29,13 @@ pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
         for (auto it = str.begin() ; it != str.end() ; ++it)
             x += metric.width(*it) ;
 
+        rect_ = QRectF(0,0,x,y) ;
         pos_ = QPointF((800-x)/2, 600-y-30) ;
     }
 
     if (effect_)
     {
         effect_->prepare(this);
-        //if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
-        //    this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
     }
 }
 
@@ -47,6 +47,7 @@ pdr::TextComponent::~TextComponent()
 
 void pdr::TextComponent::timerEvent(QTimerEvent* e)
 {
+
     if (pause_flag_)
     {
         this->killTimer(e->timerId());
@@ -54,8 +55,9 @@ void pdr::TextComponent::timerEvent(QTimerEvent* e)
     else
     {
         if (effect_)
-            effect_->play(this);
+            effect_->play(this, NULL);
     }
+
 }
 
 void pdr::TextComponent::paint(QPainter *painter,
@@ -66,12 +68,19 @@ void pdr::TextComponent::paint(QPainter *painter,
     pen.setColor(item_->getColor());
     painter->setPen(pen);
     painter->setFont(item_->getFont());
-    painter->drawText(pos_, item_->getString().c_str());
+    /*
+    if (effect_)
+        effect_->play(this, painter);
+    else*/
+        painter->drawText(pos_, item_->getString().c_str());
+
+    //if (effect_)
+    //
 }
 
 QRectF pdr::TextComponent::boundingRect() const
 {
-    return QRectF(0,0,800,600) ;
+    return rect_ ;
 }
 
 void pdr::TextComponent::play()

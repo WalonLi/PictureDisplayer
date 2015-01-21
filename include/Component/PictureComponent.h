@@ -30,7 +30,6 @@ public :
 
 
     explicit PictureComponent(QImage *i,
-                              Scale s = Scale::None,
                               QPointF p = QPointF(),
                               Effective *e = NULL) ;
     virtual ~PictureComponent() ;
