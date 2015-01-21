@@ -5,6 +5,8 @@
 3. Parser and FileSelector
 4. Run fail with QT5.4
 5. [Critical] Sometimes, program will crash when click close button, but it very hard to duplicate issue. 
+6. [Critical] QObject::startTimer: timers cannot be started from another thread
+7. [Critical] If we draw and move in the same time, the picture will break textures easily.
 
 ----
 
