@@ -43,8 +43,8 @@ void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter, QImage 
 
     if (progress_)
     {
-        painter->drawImage(0,0,image);
-        //item->moveBy(move_pos_.x(), move_pos_.y());
+        //painter->drawImage(0,0,image);
+        item->moveBy(move_pos_.x(), move_pos_.y());
         progress_-- ;
     }
 }

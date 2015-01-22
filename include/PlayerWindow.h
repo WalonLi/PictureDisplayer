@@ -9,6 +9,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include "Component/Component.h"
 #include "ui_Player.h"
 #include "PlayerLayout/GraphicsView.h"
 #include "PlayerLayout/PlayPauseBtn.h"
@@ -31,16 +32,19 @@ public:
 
     void timerEvent(QTimerEvent*);
 
-signals:
-    void playerEndSignal() ;
 
 
 private slots:
-    void playerEndSlot() ;
+    void endPlaySlots() ;
     void closeBtnClickSlot() ;
     void ppBtnClickSlot() ;
     void hideButtons() ;
     // void ppBtnChangeIconSlot() ;
+
+    void playCompSlots(pdr::Component*) ;
+    void pauseCompSlots(pdr::Component*) ;
+    void resumeCompSlots(pdr::Component*) ;
+    void stopCompSlots(pdr::Component*) ;
 
 private:
     Ui::Player *ui;

@@ -44,9 +44,6 @@ pdr::PictureComponent::PictureComponent(QImage *i, QPointF p, Effective *e):
     if (effect_)
     {
         effect_->prepare(this);
-        // set effect
-        //if (LinearMoveEffect* ptr = dynamic_cast<LinearMoveEffect*>(effect_))
-        //    this->moveBy(ptr->getStartPos().x(), ptr->getStartPos().y());
     }
 }
 
@@ -69,7 +66,6 @@ void pdr::PictureComponent::timerEvent(QTimerEvent* e)
         if (effect_)
             effect_->play(this, NULL);
     }
-
 }
 
 void pdr::PictureComponent::paint(QPainter *painter,
@@ -86,8 +82,8 @@ void pdr::PictureComponent::paint(QPainter *painter,
 
 QRectF pdr::PictureComponent::boundingRect() const
 {
-
-    return QRectF(0, 0, image_->width(), image_->height()) ;
+    return QRectF(0,0,800,600) ;
+    //return QRectF(0, 0, image_->width(), image_->height()) ;
 }
 
 void pdr::PictureComponent::play()

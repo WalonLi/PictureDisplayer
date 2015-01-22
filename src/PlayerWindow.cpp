@@ -22,8 +22,6 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     this->setFixedSize(800, 600);
     ui->setupUi(this);
 
-    // connect signal
-    QObject::connect(this, SIGNAL(playerEndSignal()), this, SLOT(playerEndSlot())) ;
 
     // set not frame less
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -46,8 +44,23 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     pdr::Controller *controller = pdr::Controller::getInstance();
     controller->setPlayerWindow(this);
     controller->setGraphicsView(graphics_view_);
+    /*
+    QObject::connect(controller, &pdr::Controller::playCompSignals,
+                     this, SLOT(playCompSlots(pdr::Component*))) ;*/
+    QObject::connect(controller, &pdr::Controller::playCompSignals,
+                     this, &PlayerWindow::playCompSlots) ;
+    QObject::connect(controller, &pdr::Controller::pauseCompSignals,
+                     this, &PlayerWindow::pauseCompSlots) ;
+    QObject::connect(controller, &pdr::Controller::resumeCompSignals,
+                     this, &PlayerWindow::resumeCompSlots) ;
+    QObject::connect(controller, &pdr::Controller::stopCompSignals,
+                     this, &PlayerWindow::stopCompSlots) ;
+    QObject::connect(controller, &pdr::Controller::endPlaySignals,
+                     this, &PlayerWindow::endPlaySlots) ;
+    /*
+    QObject::connect(this, SIGNAL(endPlaySignals()),
+                     this, SLOT(endPlaySlots())) ;*/
 
-    //boost::thread m_t(&pdr::Controller::play, controller) ;
 
     QObject::connect(button_timer_, SIGNAL(timeout()), this, SLOT(hideButtons())) ;
     this->startTimer(500) ;
@@ -90,10 +103,30 @@ void PlayerWindow::hideButtons()
     pp_btn_->hide();
 }
 
-void PlayerWindow::playerEndSlot()
+void PlayerWindow::endPlaySlots()
 {
     qDebug() << "End" ;
     QApplication::quit() ;
+}
+
+void PlayerWindow::playCompSlots(pdr::Component *comp)
+{
+    comp->play();
+}
+
+void PlayerWindow::pauseCompSlots(pdr::Component *comp)
+{
+    comp->pause();
+}
+
+void PlayerWindow::resumeCompSlots(pdr::Component *comp)
+{
+    comp->resume();
+}
+
+void PlayerWindow::stopCompSlots(pdr::Component *comp)
+{
+    comp->stop();
 }
 
 void PlayerWindow::closeBtnClickSlot()
@@ -104,8 +137,6 @@ void PlayerWindow::closeBtnClickSlot()
 
 void PlayerWindow::ppBtnClickSlot()
 {
-    qDebug() << "Play ause btn clicked" ;
-
     pdr::Controller *controller = pdr::Controller::getInstance();
 
     if (controller->getState() == pdr::Controller::CTRL_PAUSE)

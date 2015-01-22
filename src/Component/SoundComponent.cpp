@@ -44,7 +44,8 @@ void pdr::SoundComponent::timerEvent(QTimerEvent *e)
         sound_.play();
         this->killTimer(e->timerId());
     }
-    progress_++;
+    if (!pause_flag_)
+        progress_++;
 }
 
 void pdr::SoundComponent::paint(QPainter *,

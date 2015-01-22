@@ -54,6 +54,7 @@ void pdr::TextComponent::timerEvent(QTimerEvent* e)
     }
     else
     {
+
         if (effect_)
             effect_->play(this, NULL);
     }
@@ -80,7 +81,8 @@ void pdr::TextComponent::paint(QPainter *painter,
 
 QRectF pdr::TextComponent::boundingRect() const
 {
-    return rect_ ;
+    //return rect_ ;
+    return QRectF(0,0,800,600) ;
 }
 
 void pdr::TextComponent::play()

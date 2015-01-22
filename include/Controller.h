@@ -14,6 +14,7 @@
 #include <QThread>
 #include <QMediaPlayer>
 #include <QDir>
+#include <QObject>
 #include <boost/format.hpp>
 #include "Frame.h"
 #include "IPlay.h"
@@ -24,8 +25,10 @@
 namespace pdr
 {
 
-class Controller : public IPlay
+class Controller : public QObject, public IPlay
 {
+    Q_OBJECT
+
 public:
     static pdr::Controller * getInstance();
 
@@ -87,6 +90,14 @@ public:
     void backward(){}
 
     void resetFrames() ;
+
+signals:
+    void playCompSignals(Component*) ;
+    void pauseCompSignals(Component*) ;
+    void resumeCompSignals(Component*) ;
+    void stopCompSignals(Component*) ;
+
+    void endPlaySignals() ;
 
 private:
     Controller();

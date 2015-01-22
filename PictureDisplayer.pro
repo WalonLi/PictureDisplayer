@@ -53,6 +53,7 @@ SOURCES +=  \
     src/Effective/RectScrewInOutEffect.cpp
 
 
+
 HEADERS +=  \
     include/SelectorWindow.h \
     include/IPlay.h \

@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
     // below code to make a parser
     controller->setBGMusic("music/bg_music.mp3");
-#if 0
+#if 1
     pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
 
     // Image demo
@@ -108,7 +108,8 @@ int main(int argc, char *argv[])
     player_window.show();
     MoveToCenter(player_window) ;
     app.exec();
-    p_t.terminate();
+    //p_t.terminate();
+    //p_t.quit();
     p_t.wait() ;
     qDebug() <<"WHAT" ;
     return 0 ;

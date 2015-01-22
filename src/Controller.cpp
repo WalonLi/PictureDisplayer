@@ -12,7 +12,8 @@
 //#include <QMultimedia>
 
 pdr::Controller::Controller()
-    : IPlay(),
+    : QObject(),
+      IPlay(),
       frames_(),
       bg_color_(QColor(0, 0xff, 0, 30)),
       bg_music_player_(),
@@ -39,6 +40,7 @@ void pdr::Controller::resetFrames()
 pdr::Controller * pdr::Controller::getInstance()
 {
     static pdr::Controller instance ;
+
     return &instance ;
 }
 
@@ -72,7 +74,7 @@ void pdr::Controller::play()
             (*it2)->setDuration(duration) ;
             scene->addItem(*it2);
             scene->update();
-            (*it2)->play() ;
+            emit this->playCompSignals(*it2);
             (*it2)->update() ;
         }
 
@@ -84,9 +86,12 @@ void pdr::Controller::play()
             if (!pause_flag_)
             {
                 boost::this_thread::sleep_for(boost::chrono::milliseconds(50)) ;
+                //QTest::qWait(50);
                 count++ ;
                 scene->update();
             }
+            if (state_ == CTRL_STOP)
+                return ;
         }
 
         // removes components
@@ -97,7 +102,8 @@ void pdr::Controller::play()
 
     bg_music_player_.stop();
     // once play is done, emit siganl to PlayerWindow(choose replay or another)
-    if (p_window_) emit p_window_->playerEndSignal();
+    //if (p_window_) emit p_window_->endPlaySignals();
+    emit this->endPlaySignals();
 }
 
 void pdr::Controller::pause()
@@ -105,10 +111,10 @@ void pdr::Controller::pause()
     QList<QGraphicsItem*> lst = view_->scene()->items() ;
     for (auto it = lst.begin() ; it != lst.end() ; ++it)
         if (Component* comp = dynamic_cast<Component*>(*it))
-            comp->pause();
+            emit this->pauseCompSignals(comp);
+
         //((pdr::IPlay*)*it)->pause ;
     bg_music_player_.pause();
-
     pause_flag_ = true ;
     state_ = CTRL_PAUSE ;
 }
@@ -118,7 +124,7 @@ void pdr::Controller::resume()
     QList<QGraphicsItem*> lst = view_->scene()->items() ;
     for (auto it = lst.begin() ; it != lst.end() ; ++it)
         if (Component* comp = dynamic_cast<Component*>(*it))
-            comp->resume();
+            emit this->resumeCompSignals(comp);
     bg_music_player_.play() ;
     pause_flag_ = false ;
     state_ = CTRL_PLAY ;
@@ -131,7 +137,8 @@ void pdr::Controller::stop()
     for (auto it = lst.begin() ; it != lst.end() ; ++it)
         if (Component* comp = dynamic_cast<Component*>(*it))
         {
-            comp->stop();
+            //comp->stop();
+            emit this->stopCompSignals(comp);
             view_->scene()->removeItem(comp);
         }
 }
