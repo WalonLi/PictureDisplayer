@@ -3,7 +3,9 @@
 *.o
 ui_*
 PictureDisplayer
-Makefile
+Makefile*
 PictureDisplayer.pro.user
 moc_*
 build/*
+debug/*
+object_script*

@@ -18,22 +18,21 @@ linux-g++* {
 }
 
 win32-g++* {
-    Boost_VERSION = 1_56
+    Boost_VERSION = 1_57
     COMPILER = mgw48
-    Boost_DIR = G:/boost_1_56_0
-    INCLUDEPATH += G:/boost_1_56_0
-    LIBS += G:/boost_1_56_0/stage/lib/libboost_filesystem-$${COMPILER}-mt-$${Boost_VERSION}.a \
-            G:/boost_1_56_0/stage/lib/libboost_system-$${COMPILER}-mt-$${Boost_VERSION}.a \
-            G:/boost_1_56_0/stage/lib/libboost_thread-$${COMPILER}-mt-$${Boost_VERSION}.a \
-            G:/boost_1_56_0/stage/lib/libboost_chrono-$${COMPILER}-mt-$${Boost_VERSION}.a \
+    Boost_DIR = G:/boost_1_57_0
+    INCLUDEPATH += $${Boost_DIR}
+    LIBS += $${Boost_DIR}/stage/lib/libboost_filesystem-$${COMPILER}-mt-$${Boost_VERSION}.a \
+            $${Boost_DIR}/stage/lib/libboost_system-$${COMPILER}-mt-$${Boost_VERSION}.a \
+            $${Boost_DIR}/stage/lib/libboost_thread-$${COMPILER}-mt-$${Boost_VERSION}.a \
+            $${Boost_DIR}/stage/lib/libboost_chrono-$${COMPILER}-mt-$${Boost_VERSION}.a \
             -lws2_32
     QMAKE_CXXFLAGS += -mwindows
     QMAKE_LFLAGS += $$QMAKE_LFLAGS_WINDOWS
-    QMAKE_LFLAGS_CONSOLE =
+#    QMAKE_LFLAGS_CONSOLE =
 }
 
-
-CONFIG  +=  c++11
+CONFIG  +=  c++11 console
 #DEFINES += STATIC
 
 SOURCES +=  \
@@ -73,7 +72,8 @@ HEADERS +=  \
     include/PlayerLayout/CycleBtn.h \
     include/PlayerLayout/LoadFileBtn.h \
     include/Effective/LinearMoveEffect.h \
-    include/Effective/RectScrewInOutEffect.h
+    include/Effective/RectScrewInOutEffect.h \
+    include/PlayerLayout/AbstractPlayerButton.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

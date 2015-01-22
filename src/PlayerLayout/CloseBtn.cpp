@@ -11,10 +11,8 @@
 
 
 pdr::CloseBtn::CloseBtn(QWidget *parent):
-    QAbstractButton(parent),
-    pixmap_("image/close.png"),
-    progress_(0)
-    //icon_(pixmap_)
+    AbstractPlayerButton(parent),
+    pixmap_("image/close.png")
 {
     // connect to play_window widget
     this->connect(this,
@@ -22,7 +20,6 @@ pdr::CloseBtn::CloseBtn(QWidget *parent):
                   parent->parentWidget()->parentWidget(),
                   SLOT(closeBtnClickSlot())) ;
     this->hide();
-    this->startTimer(50) ;
 }
 
 void pdr::CloseBtn::timerEvent(QTimerEvent *e)
@@ -45,4 +42,10 @@ void pdr::CloseBtn::paintEvent(QPaintEvent *)
 QSize pdr::CloseBtn::sizeHint() const
 {
     return pixmap_.size() ;
+}
+
+void pdr::CloseBtn::play()
+{
+    progress_ = 0 ;
+    this->startTimer(50) ;
 }

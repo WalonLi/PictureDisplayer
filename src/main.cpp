@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
     // below code to make a parser
     controller->setBGMusic("music/bg_music.mp3");
-#if 1
+#if 0
     pdr::Frame *frame1 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
 
     // Image demo
@@ -94,11 +94,11 @@ int main(int argc, char *argv[])
     controller->addFrame(frame2);
 #endif
 
-    pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(5000)) ;
+    pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(8000)) ;
     frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon3.jpg"),
                                                    QPointF(),
                                                    new pdr::RectScrewInOutEffect(
-                                                       boost::chrono::milliseconds(5000))));
+                                                       boost::chrono::milliseconds(8000))));
 
     controller->addFrame(frame3);
 
@@ -110,10 +110,6 @@ int main(int argc, char *argv[])
     app.exec();
     p_t.terminate();
     p_t.wait() ;
-<<<<<<< HEAD
-    qDebug() << "Thread is good??" ;
-=======
     qDebug() <<"WHAT" ;
->>>>>>> Effective
     return 0 ;
 }

@@ -7,15 +7,11 @@
 #ifndef CLOSE_BTN_H
 #define CLOSE_BTN_H
 
-#include <QImage>
-#include <QPainter>
-#include <QRectF>
-#include <QBitmap>
-#include <QAbstractButton>
+#include "AbstractPlayerButton.h"
 
 namespace pdr
 {
-class CloseBtn : public QAbstractButton
+class CloseBtn : public AbstractPlayerButton
 {
 
 public :
@@ -26,9 +22,10 @@ public :
     QSize sizeHint() const ;
 
     void timerEvent(QTimerEvent *e) ;
+
+    void play() ;
 private :
     QPixmap pixmap_ ;
-    qreal progress_ ;
     // QIcon icon_ ;
 } ;
 }

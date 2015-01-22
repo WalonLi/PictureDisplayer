@@ -11,18 +11,9 @@
 
 
 pdr::LoadFileBtn::LoadFileBtn(QWidget *parent):
-    QAbstractButton(parent),
-    pixmap_("image/load.png"),
-    progress_(0)
-    //icon_(pixmap_)
+    AbstractPlayerButton(parent),
+    pixmap_("image/load.png")
 {
-    //icon_.addPixmap(pixmap_);
-    //this->setIcon(icon_);
-    // this->setIconSize(QSize(64,64));
-    // this->setGeometry(736,0,800,64) ;
-
-    //this->setMask(pixmap_.mask()) ;
-
     // connect to play_window widget
     /*
     this->connect(this,
@@ -31,7 +22,6 @@ pdr::LoadFileBtn::LoadFileBtn(QWidget *parent):
                   SLOT(closeBtnClickSlot())) ;
                   */
     this->hide();
-    this->startTimer(50) ;
 }
 
 void pdr::LoadFileBtn::timerEvent(QTimerEvent *e)
@@ -54,4 +44,10 @@ void pdr::LoadFileBtn::paintEvent(QPaintEvent *)
 QSize pdr::LoadFileBtn::sizeHint() const
 {
     return pixmap_.size() ;
+}
+
+void pdr::LoadFileBtn::play()
+{
+    progress_ = 0 ;
+    this->startTimer(50) ;
 }

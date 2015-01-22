@@ -11,10 +11,8 @@
 
 
 pdr::CycleBtn::CycleBtn(QWidget *parent):
-    QAbstractButton(parent),
-    pixmap_("image/cycle.png"),
-    progress_(0)
-    //icon_(pixmap_)
+    AbstractPlayerButton(parent),
+    pixmap_("image/cycle.png")
 {
     //icon_.addPixmap(pixmap_);
     //this->setIcon(icon_);
@@ -31,7 +29,6 @@ pdr::CycleBtn::CycleBtn(QWidget *parent):
                   SLOT(closeBtnClickSlot())) ;
                   */
     this->hide();
-    this->startTimer(50) ;
 }
 
 void pdr::CycleBtn::timerEvent(QTimerEvent *e)
@@ -54,4 +51,10 @@ void pdr::CycleBtn::paintEvent(QPaintEvent *)
 QSize pdr::CycleBtn::sizeHint() const
 {
     return pixmap_.size() ;
+}
+
+void pdr::CycleBtn::play()
+{
+    progress_ = 0 ;
+    this->startTimer(50) ;
 }

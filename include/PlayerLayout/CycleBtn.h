@@ -7,15 +7,11 @@
 #ifndef CYCLE_BTN_H
 #define CYCLE_BTN_H
 
-#include <QImage>
-#include <QPainter>
-#include <QRectF>
-#include <QBitmap>
-#include <QAbstractButton>
+#include "AbstractPlayerButton.h"
 
 namespace pdr
 {
-class CycleBtn : public QAbstractButton
+class CycleBtn : public AbstractPlayerButton
 {
 
 public :
@@ -26,10 +22,9 @@ public :
     QSize sizeHint() const ;
 
     void timerEvent(QTimerEvent *e) ;
+    void play() ;
 private :
     QPixmap pixmap_ ;
-    qreal progress_ ;
-    // QIcon icon_ ;
 } ;
 }
 #endif

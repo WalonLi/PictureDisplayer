@@ -7,15 +7,11 @@
 #ifndef PLAY_PAUSE_BTN_H
 #define PLAY_PAUSE_BTN_H
 
-#include <QImage>
-#include <QPainter>
-#include <QRectF>
-#include <QBitmap>
-#include <QAbstractButton>
+#include "AbstractPlayerButton.h"
 
 namespace pdr
 {
-class PlayPauseBtn : public QAbstractButton
+class PlayPauseBtn : public AbstractPlayerButton
 {
     //Q_OBJECT
 
@@ -29,13 +25,11 @@ public :
     void setBtnPixmap(bool flag) ;
 
     void timerEvent(QTimerEvent *e) ;
-
+    void play() ;
 private :
     QPixmap pixmap_ ;
     QPixmap play_pixmap_ ;
     QPixmap pause_pixmap_ ;
-    qreal progress_ ;
-    // QIcon icon_ ;
 } ;
 }
 #endif
