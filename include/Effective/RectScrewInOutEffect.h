@@ -20,9 +20,9 @@ public:
     explicit RectScrewInOutEffect(milliseconds m = milliseconds(1000));
     virtual ~RectScrewInOutEffect() ;
 
-    void play(QGraphicsItem*, QPainter*);
-    void play(QGraphicsItem*, QPainter*, QImage&) ;
-    void play(QGraphicsItem*, QPainter*, QString&){}
+    void play(QGraphicsItem*);
+    void draw(QGraphicsItem*, QPainter*, QImage&) ;
+    void draw(QGraphicsItem*, QPainter*, QString){}
     void prepare(QGraphicsItem* item) ;
 
     //const QPointF & getStartPos() const {return start_pos_;}

@@ -6,6 +6,7 @@
 
 
 #include <QDebug>
+#include <QGraphicsScene>
 #include "include/Controller.h"
 #include "include/PlayerWindow.h"
 
@@ -63,7 +64,7 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
 
 
     QObject::connect(button_timer_, SIGNAL(timeout()), this, SLOT(hideButtons())) ;
-    this->startTimer(500) ;
+    this->startTimer(50) ;
 }
 
 
@@ -71,6 +72,9 @@ void PlayerWindow::timerEvent(QTimerEvent*)
 {
     static QPoint org = QCursor::pos() ;
     QPoint mod = QCursor::pos() ;
+
+    // update scene
+    graphics_view_->scene()->update();
 
     // check cursor in views or not
     if (!this->rect().contains(this->mapFromGlobal(mod)))
@@ -111,6 +115,9 @@ void PlayerWindow::endPlaySlots()
 
 void PlayerWindow::playCompSlots(pdr::Component *comp)
 {
+    //graphics_view_->getScene()->addItem(comp);
+    graphics_view_->scene()->addItem(comp);
+    comp->update();
     comp->play();
 }
 
@@ -126,6 +133,8 @@ void PlayerWindow::resumeCompSlots(pdr::Component *comp)
 
 void PlayerWindow::stopCompSlots(pdr::Component *comp)
 {
+    //graphics_view_->getScene()->removeItem(comp);
+    graphics_view_->scene()->removeItem(comp);
     comp->stop();
 }
 

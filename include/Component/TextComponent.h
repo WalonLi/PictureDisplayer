@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QRectF>
+#include <QFontMetrics>
 #include <QTimerEvent>
 #include <QTextItem>
 #include "Component.h"
@@ -36,6 +37,17 @@ public:
     const std::string & getString() const {return str_;}
     const QColor & getColor() const {return color_;}
     const QFont & getFont() const {return font_;}
+
+    QRectF getItemRectF() const
+    {
+        QFontMetrics metric(this->getFont()) ;
+        qreal x = 0;
+        qreal y = this->getFont().pixelSize() ;
+        std::string str = this->getString() ;
+        for (auto it = str.begin() ; it != str.end() ; ++it)
+            x += metric.width(*it) ;
+        return QRectF(0,0,x,y) ;
+    }
 
 private:
     std::string str_ ;

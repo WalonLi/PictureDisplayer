@@ -15,46 +15,37 @@ pdr::LinearMoveEffect::LinearMoveEffect(QPointF p1, QPointF p2, boost::chrono::m
 {
     // per 50 milisecond to refresh.
     m /= 50 ;
-    progress_ = m.count() ;
-    move_pos_= (p2-p1) / progress_;
+    max_progress_ = m.count() ;
+    move_pos_= (p2-p1) / max_progress_;
+    qDebug() << move_pos_;
 }
 
 pdr::LinearMoveEffect::~LinearMoveEffect()
 {
 }
 
-void pdr::LinearMoveEffect::prepare(QGraphicsItem *item)
+void pdr::LinearMoveEffect::prepare(QGraphicsItem *)
 {
-    item->moveBy(start_pos_.x(), start_pos_.y());
+    //item->moveBy(start_pos_.x(), start_pos_.y());
 }
 
-void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter)
+void pdr::LinearMoveEffect::play(QGraphicsItem*)
 {
-
-    if (progress_)
+    if (max_progress_ > progress_)
     {
-        item->moveBy(move_pos_.x(), move_pos_.y());
-        progress_-- ;
+        progress_++ ;
     }
 }
 
-void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter, QImage &image)
+void pdr::LinearMoveEffect::draw(QGraphicsItem *, QPainter *painter, QImage &image)
 {
-
-    if (progress_)
-    {
-        //painter->drawImage(0,0,image);
-        item->moveBy(move_pos_.x(), move_pos_.y());
-        progress_-- ;
-    }
+    painter->drawImage(start_pos_+(progress_*move_pos_), image);
 }
 
-void pdr::LinearMoveEffect::play(QGraphicsItem *item, QPainter *painter, QString &str)
+void pdr::LinearMoveEffect::draw(QGraphicsItem *, QPainter *painter, QString str)
 {
+    //qDebug() << "text" ;
+    //painter->drawText(366,540,str);
 
-    if (progress_)
-    {
-        item->moveBy(move_pos_.x(), move_pos_.y());
-        progress_-- ;
-    }
+    painter->drawText(start_pos_+(progress_*move_pos_), str);
 }

@@ -64,7 +64,7 @@ void pdr::PictureComponent::timerEvent(QTimerEvent* e)
     else
     {
         if (effect_)
-            effect_->play(this, NULL);
+            effect_->play(this);
     }
 }
 
@@ -72,17 +72,16 @@ void pdr::PictureComponent::paint(QPainter *painter,
                                   const QStyleOptionGraphicsItem *,
                                   QWidget *)
 {
-    /*
     if (effect_)
-        effect_->play(this, painter, *image_);
+        effect_->draw(this, painter, *image_);
     else
-    */
         painter->drawImage(pos_, *image_);
 }
 
 QRectF pdr::PictureComponent::boundingRect() const
 {
     return QRectF(0,0,800,600) ;
+    //return image_->rect() ;
     //return QRectF(0, 0, image_->width(), image_->height()) ;
 }
 

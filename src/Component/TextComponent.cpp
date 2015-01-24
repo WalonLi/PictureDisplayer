@@ -21,13 +21,9 @@ pdr::TextComponent::TextComponent(pdr::TextItem *t, QPointF p, Effective *e):
     if (pos_.isNull())
     {
         // if not to assign poistion, put it to middle-down.
-        QFontMetrics metric(item_->getFont()) ;
 
-        qreal x = 0;
-        qreal y = item_->getFont().pixelSize() ;
-        std::string str = item_->getString() ;
-        for (auto it = str.begin() ; it != str.end() ; ++it)
-            x += metric.width(*it) ;
+        qreal x = item_->getItemRectF().width();
+        qreal y = item_->getItemRectF().height();
 
         rect_ = QRectF(0,0,x,y) ;
         pos_ = QPointF((800-x)/2, 600-y-30) ;
@@ -54,9 +50,8 @@ void pdr::TextComponent::timerEvent(QTimerEvent* e)
     }
     else
     {
-
         if (effect_)
-            effect_->play(this, NULL);
+            effect_->play(this);
     }
 
 }
@@ -69,12 +64,12 @@ void pdr::TextComponent::paint(QPainter *painter,
     pen.setColor(item_->getColor());
     painter->setPen(pen);
     painter->setFont(item_->getFont());
-    /*
-    if (effect_)
-        effect_->play(this, painter);
-    else*/
-        painter->drawText(pos_, item_->getString().c_str());
 
+    if (effect_)
+        effect_->draw(this, painter, item_->getString().c_str());
+    else
+        painter->drawText(pos_, item_->getString().c_str());
+    //painter->drawText(0,0, item_->getString().c_str());
     //if (effect_)
     //
 }

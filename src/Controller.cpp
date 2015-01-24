@@ -56,9 +56,9 @@ void pdr::Controller::play()
 
     // Set background color
     view_->setBackgroundBrush(bg_color_);
-    QGraphicsScene *scene = view_->scene() ;
 
-    QTest::qWait(500) ; // wait few second to start play;
+    //QTest::qWait(500) ; // wait few second to start play;
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(500)) ;
 
     // play background music
     bg_music_player_.play(); // it will open thread to play music!!
@@ -72,15 +72,13 @@ void pdr::Controller::play()
         for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
         {
             (*it2)->setDuration(duration) ;
-            scene->addItem(*it2);
-            scene->update();
             emit this->playCompSignals(*it2);
-            (*it2)->update() ;
         }
 
         // start to play...
         duration /= 50 ;
         int count = 0 ;
+
         while (count < duration.count())
         {
             if (!pause_flag_)
@@ -88,7 +86,6 @@ void pdr::Controller::play()
                 boost::this_thread::sleep_for(boost::chrono::milliseconds(50)) ;
                 //QTest::qWait(50);
                 count++ ;
-                scene->update();
             }
             if (state_ == CTRL_STOP)
                 return ;
@@ -96,8 +93,7 @@ void pdr::Controller::play()
 
         // removes components
         for (auto it2 = comps.begin() ; it2 != comps.end() ; ++it2)
-            scene->removeItem(*it2);
-        scene->update();
+            emit this->stopCompSignals(*it2);
     }
 
     bg_music_player_.stop();
@@ -113,7 +109,6 @@ void pdr::Controller::pause()
         if (Component* comp = dynamic_cast<Component*>(*it))
             emit this->pauseCompSignals(comp);
 
-        //((pdr::IPlay*)*it)->pause ;
     bg_music_player_.pause();
     pause_flag_ = true ;
     state_ = CTRL_PAUSE ;
@@ -137,8 +132,6 @@ void pdr::Controller::stop()
     for (auto it = lst.begin() ; it != lst.end() ; ++it)
         if (Component* comp = dynamic_cast<Component*>(*it))
         {
-            //comp->stop();
             emit this->stopCompSignals(comp);
-            view_->scene()->removeItem(comp);
         }
 }

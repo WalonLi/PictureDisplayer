@@ -72,8 +72,8 @@ int main(int argc, char *argv[])
                              new pdr::TextItem("Hello",QColor(0,0xff,0,0xff),f),
                              QPointF(),
                              new pdr::LinearMoveEffect(
-                                 QPointF(800,0),
-                                 QPointF(-800,0),
+                                 QPointF(800+366,540),
+                                 QPointF(-800+366,540),
                                  boost::chrono::milliseconds(5000))));
     //frame1->addComponent(new pdr::TextComponent(
     //                         new pdr::TextItem("Hello")));
@@ -104,9 +104,9 @@ int main(int argc, char *argv[])
 
     PlayerWindow player_window;
     pdr::PlayThread p_t ;
-    p_t.start();
     player_window.show();
     MoveToCenter(player_window) ;
+    p_t.start();
     app.exec();
     //p_t.terminate();
     //p_t.quit();

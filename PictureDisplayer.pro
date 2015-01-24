@@ -20,7 +20,7 @@ linux-g++* {
 win32-g++* {
     Boost_VERSION = 1_57
     COMPILER = mgw48
-    Boost_DIR = G:/boost_1_57_0
+    Boost_DIR = D:/boost_1_57_0
     INCLUDEPATH += $${Boost_DIR}
     LIBS += $${Boost_DIR}/stage/lib/libboost_filesystem-$${COMPILER}-mt-$${Boost_VERSION}.a \
             $${Boost_DIR}/stage/lib/libboost_system-$${COMPILER}-mt-$${Boost_VERSION}.a \

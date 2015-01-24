@@ -34,7 +34,7 @@ void pdr::RectScrewInOutEffect::prepare(QGraphicsItem *item)
     //item->
 }
 
-void pdr::RectScrewInOutEffect::play(QGraphicsItem *item, QPainter *p)
+void pdr::RectScrewInOutEffect::play(QGraphicsItem *item)
 {
     //p->draw
     //item->moveBy(-10, 0);
@@ -44,7 +44,7 @@ void pdr::RectScrewInOutEffect::play(QGraphicsItem *item, QPainter *p)
     //p = new QPainter(item->se) ;
 }
 
-void pdr::RectScrewInOutEffect::play(QGraphicsItem *item, QPainter *p, QImage & i)
+void pdr::RectScrewInOutEffect::draw(QGraphicsItem *item, QPainter *p, QImage & i)
 {
     //p->draw
     //item->moveBy(-10, 0);
