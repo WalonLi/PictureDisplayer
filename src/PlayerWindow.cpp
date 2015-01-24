@@ -64,7 +64,8 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
 
 
     QObject::connect(button_timer_, SIGNAL(timeout()), this, SLOT(hideButtons())) ;
-    this->startTimer(50) ;
+    button_timer_->setTimerType(Qt::PreciseTimer);
+    this->startTimer(50, Qt::PreciseTimer) ;
 }
 
 

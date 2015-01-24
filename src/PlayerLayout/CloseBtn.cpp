@@ -27,10 +27,13 @@ void pdr::CloseBtn::timerEvent(QTimerEvent *e)
     if (!progress_) this->show();
 
     this->move(800-(progress_*16), 0);
-    progress_++ ;
 
-    if (progress_ >= 5)
+    if (this->pos().x() <= 736)
+    {
         this->killTimer(e->timerId());
+        return ;
+    }
+    progress_++ ;
 }
 
 void pdr::CloseBtn::paintEvent(QPaintEvent *)
@@ -47,5 +50,5 @@ QSize pdr::CloseBtn::sizeHint() const
 void pdr::CloseBtn::play()
 {
     progress_ = 0 ;
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }

@@ -87,7 +87,7 @@ QRectF pdr::PictureComponent::boundingRect() const
 
 void pdr::PictureComponent::play()
 {
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }
 
 void pdr::PictureComponent::pause()
@@ -98,7 +98,7 @@ void pdr::PictureComponent::pause()
 void pdr::PictureComponent::resume()
 {
     pause_flag_ = false ;
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }
 
 void pdr::PictureComponent::stop()

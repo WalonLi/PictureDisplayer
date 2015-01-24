@@ -36,10 +36,13 @@ void pdr::CycleBtn::timerEvent(QTimerEvent *e)
     if (!progress_) this->show();
 
     this->move(864-(progress_*16), 450);
-    progress_++ ;
-
-    if (progress_ >= 9)
+    if (this->pos().x() <= 736)
+    {
         this->killTimer(e->timerId());
+        return ;
+    }
+
+    progress_++ ;
 }
 
 void pdr::CycleBtn::paintEvent(QPaintEvent *)
@@ -56,5 +59,5 @@ QSize pdr::CycleBtn::sizeHint() const
 void pdr::CycleBtn::play()
 {
     progress_ = 0 ;
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }

@@ -82,7 +82,7 @@ QRectF pdr::TextComponent::boundingRect() const
 
 void pdr::TextComponent::play()
 {
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }
 
 void pdr::TextComponent::pause()
@@ -93,7 +93,7 @@ void pdr::TextComponent::pause()
 void pdr::TextComponent::resume()
 {
     pause_flag_ = false ;
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }
 
 void pdr::TextComponent::stop()

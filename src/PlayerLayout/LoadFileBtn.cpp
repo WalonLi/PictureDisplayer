@@ -29,10 +29,13 @@ void pdr::LoadFileBtn::timerEvent(QTimerEvent *e)
     if (!progress_) this->show();
 
     this->move(832-(progress_*16), 370);
-    progress_++ ;
-
-    if (progress_ >= 7)
+    if (this->pos().x() <= 736)
+    {
         this->killTimer(e->timerId());
+        return ;
+    }
+
+    progress_++ ;
 }
 
 void pdr::LoadFileBtn::paintEvent(QPaintEvent *)
@@ -49,5 +52,5 @@ QSize pdr::LoadFileBtn::sizeHint() const
 void pdr::LoadFileBtn::play()
 {
     progress_ = 0 ;
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }

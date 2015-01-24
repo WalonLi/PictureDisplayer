@@ -28,10 +28,13 @@ void pdr::PlayPauseBtn::timerEvent(QTimerEvent *e)
     if (!progress_) this->show();
 
     this->move(896-(progress_*16), 530);
-    progress_++ ;
-
-    if (progress_ >= 11)
+    if (this->pos().x() <= 736)
+    {
         this->killTimer(e->timerId());
+        return ;
+    }
+
+    progress_++ ;
 }
 
 void pdr::PlayPauseBtn::setBtnPixmap(bool flag)
@@ -54,5 +57,5 @@ QSize pdr::PlayPauseBtn::sizeHint() const
 void pdr::PlayPauseBtn::play()
 {
     progress_ = 0 ;
-    this->startTimer(50) ;
+    this->startTimer(50, Qt::PreciseTimer) ;
 }
