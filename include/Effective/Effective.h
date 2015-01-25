@@ -21,8 +21,8 @@ public :
     virtual ~Effective(){}
 
     virtual void play(QGraphicsItem*) = 0 ;
-    virtual void draw(QGraphicsItem*, QPainter*, QImage&) = 0 ;
-    virtual void draw(QGraphicsItem*, QPainter*, QString) = 0 ;
+    virtual void draw(QGraphicsItem*, QPainter*, const QImage&) = 0 ;
+    virtual void draw(QGraphicsItem*, QPainter*, const std::string&) = 0 ;
     virtual void prepare(QGraphicsItem*) = 0 ;
 protected :
     int progress_;

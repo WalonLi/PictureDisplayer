@@ -80,8 +80,8 @@ void pdr::PictureComponent::paint(QPainter *painter,
 
 QRectF pdr::PictureComponent::boundingRect() const
 {
-    return QRectF(0,0,800,600) ;
-    //return image_->rect() ;
+    //return QRectF(0,0,800,600) ;
+    return image_->rect() ;
     //return QRectF(0, 0, image_->width(), image_->height()) ;
 }
 

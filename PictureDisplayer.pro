@@ -74,7 +74,8 @@ HEADERS +=  \
     include/PlayerLayout/LoadFileBtn.h \
     include/Effective/LinearMoveEffect.h \
     include/Effective/RectScrewInOutEffect.h \
-    include/PlayerLayout/AbstractPlayerButton.h
+    include/PlayerLayout/AbstractPlayerButton.h \
+    include/PlayerLayout/ButtonEventFiler.h
 
 FORMS   +=  ui/Selector.ui\
             ui/Player.ui

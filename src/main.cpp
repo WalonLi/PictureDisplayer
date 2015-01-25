@@ -94,11 +94,10 @@ int main(int argc, char *argv[])
     controller->addFrame(frame2);
 #endif
 
-    pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(8000)) ;
-    frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon3.jpg"),
+    pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(15000)) ;
+    frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
                                                    QPointF(),
-                                                   new pdr::RectScrewInOutEffect(
-                                                       boost::chrono::milliseconds(8000))));
+                                                   new pdr::RectScrewInOutEffect()));
 
     controller->addFrame(frame3);
 

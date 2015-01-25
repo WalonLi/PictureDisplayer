@@ -23,7 +23,6 @@ PlayerWindow::PlayerWindow(QWidget *parent) :
     this->setFixedSize(800, 600);
     ui->setupUi(this);
 
-
     // set not frame less
     this->setWindowFlags(Qt::FramelessWindowHint);
 

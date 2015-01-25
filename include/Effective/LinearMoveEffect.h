@@ -21,8 +21,8 @@ public:
     virtual ~LinearMoveEffect() ;
 
     void play(QGraphicsItem*);
-    void draw(QGraphicsItem*, QPainter*, QImage&);
-    void draw(QGraphicsItem*, QPainter*, QString);
+    void draw(QGraphicsItem*, QPainter*, const QImage&);
+    void draw(QGraphicsItem*, QPainter*, const std::string&);
     void prepare(QGraphicsItem*);
 
     //const QPointF & getStartPos() const {return start_pos_;}

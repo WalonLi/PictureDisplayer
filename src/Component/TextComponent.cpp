@@ -66,7 +66,7 @@ void pdr::TextComponent::paint(QPainter *painter,
     painter->setFont(item_->getFont());
 
     if (effect_)
-        effect_->draw(this, painter, item_->getString().c_str());
+        effect_->draw(this, painter, item_->getString());
     else
         painter->drawText(pos_, item_->getString().c_str());
     //painter->drawText(0,0, item_->getString().c_str());
@@ -76,8 +76,8 @@ void pdr::TextComponent::paint(QPainter *painter,
 
 QRectF pdr::TextComponent::boundingRect() const
 {
-    //return rect_ ;
-    return QRectF(0,0,800,600) ;
+    return rect_ ;
+    //return QRectF(0,0,800,600) ;
 }
 
 void pdr::TextComponent::play()
