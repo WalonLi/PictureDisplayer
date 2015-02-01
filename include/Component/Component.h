@@ -27,6 +27,8 @@ public :
     void setDuration(const boost::chrono::milliseconds &d){ duration_ = d;}
     const boost::chrono::milliseconds & getDuration() const {return duration_ ;}
 
+    virtual QSizeF compSize() const {return QSizeF(0,0);}
+
     virtual void play(){}
     virtual void pause(){}
     virtual void resume(){}

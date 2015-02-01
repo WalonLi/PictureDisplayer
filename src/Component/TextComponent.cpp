@@ -76,8 +76,14 @@ void pdr::TextComponent::paint(QPainter *painter,
 
 QRectF pdr::TextComponent::boundingRect() const
 {
-    return rect_ ;
-    //return QRectF(0,0,800,600) ;
+    //return rect_ ;
+    // if not return 800x600, button's will flicker
+    return QRectF(0,0,800,600) ;
+}
+
+QSizeF pdr::TextComponent::compSize() const
+{
+    return item_->getItemRectF().size() ;
 }
 
 void pdr::TextComponent::play()

@@ -20,6 +20,12 @@ public :
     explicit Effective() : progress_(0) {}
     virtual ~Effective(){}
 
+    enum State
+    {
+        Playing = 0,
+        Stop
+    };
+
     virtual void play(QGraphicsItem*) = 0 ;
     virtual void draw(QGraphicsItem*, QPainter*, const QImage&) = 0 ;
     virtual void draw(QGraphicsItem*, QPainter*, const std::string&) = 0 ;

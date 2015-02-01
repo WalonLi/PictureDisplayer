@@ -40,6 +40,7 @@ public :
     void pause() ;
     void resume() ;
     void stop() ;
+    QSizeF compSize() const ;
 
     const QImage* getImage() const {return image_ ;}
     const Effective* getEffective() const {return effect_ ;}

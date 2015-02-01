@@ -37,10 +37,10 @@ void pdr::LinearMoveEffect::play(QGraphicsItem*)
     }
 }
 
-void pdr::LinearMoveEffect::draw(QGraphicsItem *i, QPainter *painter, const QImage &image)
+void pdr::LinearMoveEffect::draw(QGraphicsItem *, QPainter *painter, const QImage &image)
 {
-    //painter->drawImage(start_pos_+(progress_*move_pos_), image);
-    painter->drawImage(600,0, image);
+    painter->drawImage(start_pos_+(progress_*move_pos_), image);
+    //painter->drawImage(600,0, image);
 }
 
 void pdr::LinearMoveEffect::draw(QGraphicsItem *, QPainter *painter, const std::string &str)

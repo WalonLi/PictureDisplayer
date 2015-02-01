@@ -9,7 +9,7 @@
 #include <QTimerEvent>
 #include <QPaintEvent>
 #include "include/PlayerLayout/CloseBtn.h"
-#include "include/PlayerLayout/ButtonEventFiler.h"
+//#include "include/PlayerLayout/ButtonEventFiler.h"
 
 pdr::CloseBtn::CloseBtn(QWidget *parent):
     AbstractPlayerButton(parent),
@@ -43,17 +43,10 @@ void pdr::CloseBtn::timerEvent(QTimerEvent *e)
 
 void pdr::CloseBtn::paintEvent(QPaintEvent *e)
 {
-    //this->setWindowOpacity(1);
-    //bitBlt(this, 0, 0, &pm);
-    //qDebug() << "paint" ;
-
     QPainter p(this) ;
 
-    //p.begin(this) ;
     p.drawPixmap(0,0, pixmap_);
 
-    //p.end();
-    //qDebug() << "123" ;
 }
 
 QSize pdr::CloseBtn::sizeHint() const

@@ -6,6 +6,7 @@
 
 #include "include/Effective/RectScrewInOutEffect.h"
 #include <QPainter>
+#include <include/Component/Component.h>
 
 pdr::RectScrewInOutEffect::RectScrewInOutEffect():
     Effective(),
@@ -30,8 +31,11 @@ pdr::RectScrewInOutEffect::~RectScrewInOutEffect()
 
 void pdr::RectScrewInOutEffect::prepare(QGraphicsItem *item)
 {
-    comp_width_ = item->boundingRect().width();
-    comp_height_ = item->boundingRect().height();
+    if (Component *comp = dynamic_cast<Component*>(item))
+    {
+        comp_width_ = comp->compSize().width() ;
+        comp_height_ = comp->compSize().height();
+    }
     //item->moveBy(800,0);
     //item->matrix().rotate(5) ;
     //qDebug() <<item->mapRectToScene(item->boundingRect()) ;

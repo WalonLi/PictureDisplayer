@@ -80,9 +80,15 @@ void pdr::PictureComponent::paint(QPainter *painter,
 
 QRectF pdr::PictureComponent::boundingRect() const
 {
-    //return QRectF(0,0,800,600) ;
-    return image_->rect() ;
+    // if not return 800x600, button's will flicker
+    return QRectF(0,0,800,600) ;
+    //return image_->rect() ;
     //return QRectF(0, 0, image_->width(), image_->height()) ;
+}
+
+QSizeF pdr::PictureComponent::compSize() const
+{
+    return image_->rect().size() ;
 }
 
 void pdr::PictureComponent::play()

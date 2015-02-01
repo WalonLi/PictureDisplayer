@@ -70,6 +70,7 @@ public :
     void pause() ;
     void resume() ;
     void stop() ;
+    QSizeF compSize() const ;
 
     const Effective* getEffective() const {return effect_ ;}
 

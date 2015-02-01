@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 #endif
 
     pdr::Frame *frame3 = new pdr::Frame(boost::chrono::milliseconds(15000)) ;
-    frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon.jpg"),
+    frame3->addComponent(new pdr::PictureComponent(new QImage("image/walon3.jpg"),
                                                    QPointF(),
                                                    new pdr::RectScrewInOutEffect()));
 
