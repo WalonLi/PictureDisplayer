@@ -1,12 +1,9 @@
-# Known Issue or Something
+#I AM BUSYING, HOLDING THIS PROJECT..
 
+# Known Issue or Something
 1. Transparent player window and button(Limitation now, please see 1/2 history)
 2. Finish Spinner bar(Selector->Player animation)
 3. Parser and FileSelector
-4. Run fail with QT5.4
-5. [Critical] Sometimes, program will crash when click close button, but it very hard to duplicate issue. 
-6. [Critical] QObject::startTimer: timers cannot be started from another thread
-7. [Critical] If we draw and move in the same time, the picture will break textures easily.
 
 ----
 
@@ -17,6 +14,12 @@
 ----
 
 # History
+## 15/02/01
+1. Fixed windows timer not accurately.
+2. Fixed program crash when click close button.
+3. Fixed picture broken issue.
+4. Fixed Qt 5.4 run fail.
+
 ## 15/01/18
 1. Finish pause/resume feature, works good :)
 2. Understand how to do a animation(see PictureComponent.cpp)
